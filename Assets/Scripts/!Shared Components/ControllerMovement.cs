@@ -4,6 +4,7 @@ using System.Collections;
 [System.Serializable]
 public class ControllerMovement {
 //-----------------------------------------------------------------------------------------------------------------------------//			
+    public bool enabled                                 = true; // Can the character jump?
     public float runSpeed                               = 7.0f;// The speed when running 	
     public float slideFactor                            = 0.05f;	// The speed when sliding up and around corners 
 	[System.NonSerializedAttribute]	public float slideX = 0.0f;
