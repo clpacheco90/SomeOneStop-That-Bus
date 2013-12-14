@@ -53,6 +53,7 @@ public static class CharacterMovement{
 	}
     //-----------------------------------------------------------------------------------------------------------------------------//	
     public static void GravityMovementX(ControllerMovement movement, ControllerJumping jump, CharacterController controller) {
+        if (!movement.enabled) return;
         var h = Input.GetAxisRaw("Horizontal");
         movement.isMoving = Mathf.Abs(h) > 0.1f;
         //Debug.Log(h);
@@ -103,7 +104,7 @@ public static class CharacterMovement{
         currentMovementOffset *= Time.smoothDeltaTime; // We always want the movement to be framerate independent.  Multiplying by Time.smoothDeltaTime does this.
         movement.slideX = 0.0f;
         movement.collisionFlags = controller.Move(currentMovementOffset);
-        movement.velocity = (movement.transform.position - lastPosition) / Time.smoothDeltaTime;
+        //! movement.velocity = (movement.transform.position - lastPosition) / Time.smoothDeltaTime; NOT IN USE
     }
     //-----------------------------------------------------------------------------------------------------------------------------//	
     public static void KinematicMovementX(ControllerMovement movement, ControllerJumping jump, CharacterController controller) {
@@ -226,5 +227,16 @@ public static class CharacterMovement{
         //NGUIDebug.Log(movement.transform.rotation.ToString());
     }
     //-----------------------------------------------------------------------------------------------------------------------------//	
+    public static void BulletMovement(Transform t) {
+        //var v           = new Vector3(t.position.x, t.position.y, t.position.z);
+        //var curSmooth   = 0.0f; // Smooth the speed based on the current target direction
+        //var targetSpeed = 1.0f; // Choose target speed
+
+        //curSmooth          = jump.speedSmoothing * Time.smoothDeltaTime;
+        //targetSpeed       *= jump.jumpSpeed;
+        //movement.hangTime += Time.smoothDeltaTime;
+        //movement.speed = Mathf.Lerp(movement.speed, targetSpeed, curSmooth);
+        //t.Translate();
+    }
     //-----------------------------------------------------------------------------------------------------------------------------//	
 }
