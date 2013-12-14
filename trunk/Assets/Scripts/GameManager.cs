@@ -18,5 +18,15 @@ public class GameManager : MonoBehaviour {
         EnvironmentAceleration    = _environmentAceleration;
         EnvironmentSpeedSmoothing = _environmentSpeedSmoothing;
         ForwardWay                = _forwardWay;
+        if ((Input.GetKey(KeyCode.KeypadEnter)) || (Input.GetKey(KeyCode.Space))) {
+            Camera.main.camera.GetComponent<CameraMoveAt>()._offsetX = 0;
+            // Enable game
+        }
+        //AddingMoreSpeed();
 	}
+
+    void AddingMoreSpeed() {
+        if (_environmentSpeedSmoothing >= 25) return;
+        _environmentSpeedSmoothing += _environmentSpeedSmoothing * 0.001f;
+    }
 }
