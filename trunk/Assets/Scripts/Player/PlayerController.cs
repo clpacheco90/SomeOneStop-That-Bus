@@ -29,4 +29,7 @@ public class PlayerController : MonoBehaviour {
         _controllerMovement.direction = Vector3.zero;
 		_controllerMovement.transform = transform;
 	}
+
+    //-----------------------------------------------------------------------------------------------------------------------------//	
+
 }

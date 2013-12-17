@@ -19,7 +19,7 @@ public class LoadLevel : MonoBehaviour{
 	}
 //-----------------------------------------------------------------------------------------------------------------------------//			
     void Update() {
-        if (_load) Active();        
+        AutoFade.LoadLevel(_autoFadeConfig.nextScene, _autoFadeConfig.fadeOutTime, _autoFadeConfig.fadeInTime, _autoFadeConfig.fadeColor);
     }
 //-----------------------------------------------------------------------------------------------------------------------------//			
     void Active() {

@@ -9,8 +9,11 @@ public class GameManager : MonoBehaviour {
         Lose
     }
 
+    public GameObject _player;
+    public GameObject _bus;
     public float _environmentAceleration;
     public float _environmentSpeedSmoothing;
+    public bool _enablePlayerJump;
     public int _forwardWay = -1;
 
     public static float EnvironmentAceleration;
@@ -32,25 +35,36 @@ public class GameManager : MonoBehaviour {
             case GameState.OnGame:
                 Camera.main.camera.GetComponent<CameraMoveAt>()._offsetX = 4;
                 AddingMoreSpeed();
+                if(!_enablePlayerJump)GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>()._controllerJumping.enabled = true;
+                _enablePlayerJump = true;
+                float d = Distance.DistanceNonAbs(_player.transform.position.x, _bus.transform.position.x);
+                //NGUIDebug.Log(d.ToString());
+                if (d <= -15) {
+                    CurrentGameState = GameState.Lose;
+                    if (_enablePlayerJump) GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>()._controllerJumping.enabled = false;
+                    _enablePlayerJump = false;
+                }
                 break;
             case GameState.Lose:
                 Camera.main.camera.GetComponent<CameraMoveAt>()._offsetX = -4;
+                _environmentSpeedSmoothing = 0;
+                if (Input.GetButtonDown("Fire1")) {
+                    Application.LoadLevel("SplashScreenIII");
+                }
                 break;            
         }
 
         CameraHorizontalExtent    = Camera.main.camera.orthographicSize * Screen.width / Screen.height;
         EnvironmentAceleration    = _environmentAceleration;
         EnvironmentSpeedSmoothing = _environmentSpeedSmoothing;
-        ForwardWay                = _forwardWay;
-        //if ((Input.GetKey(KeyCode.KeypadEnter)) || (Input.GetKey(KeyCode.Space))) {
-        //    GameState = GameState.OnGame;
-        //    // Enable game
-        //}
-        //AddingMoreSpeed();
+        ForwardWay                = _forwardWay;      
 	}
 
     void AddingMoreSpeed() {
         if (_environmentSpeedSmoothing >= 25) return;
         _environmentSpeedSmoothing += _environmentSpeedSmoothing * 0.001f;
     }
+
+    
+
 }
