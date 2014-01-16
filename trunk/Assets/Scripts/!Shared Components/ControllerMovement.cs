@@ -23,5 +23,5 @@ public class ControllerMovement {
     [System.NonSerializedAttribute] public float hangTime           = 0.0f; // This will keep track of how long we have we been in the air (not grounded)	
 	[System.NonSerializedAttribute]	public Transform transform      = null;	
 	[System.NonSerializedAttribute]	public Transform activePlatform = null;	
-//-----------------------------------------------------------------------------------------------------------------------------//			
+//-----------------------------------------------------------------------------------------------------------------------------//
 }

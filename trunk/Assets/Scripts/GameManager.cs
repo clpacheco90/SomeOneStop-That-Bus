@@ -17,12 +17,13 @@ public class GameManager : MonoBehaviour {
     public int _forwardWay = -1;
 
     public static float EnvironmentAceleration;
-    public static float EnvironmentSpeedSmoothing;
+    [SerializeField]public static float EnvironmentSpeedSmoothing;
     public static float CameraHorizontalExtent;
     public static int ForwardWay;
 
     public static GameState CurrentGameState;
 
+    private bool col;
     void Start() {
         CurrentGameState = GameState.Start;
     }
@@ -30,20 +31,24 @@ public class GameManager : MonoBehaviour {
 	void Update () {
         switch (CurrentGameState) {
             case GameState.Start:
-                Camera.main.camera.GetComponent<CameraMoveAt>()._offsetX = 12;
+                Camera.main.camera.GetComponent<CameraMoveAt>()._gameObj = _bus.transform;
+                Camera.main.camera.GetComponent<CameraMoveAt>()._offsetX = 5;
                 break;
             case GameState.OnGame:
-                Camera.main.camera.GetComponent<CameraMoveAt>()._offsetX = 4;
-                AddingMoreSpeed();
-                if(!_enablePlayerJump)GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>()._controllerJumping.enabled = true;
+                Camera.main.camera.GetComponent<CameraMoveAt>()._gameObj = _player.transform;
+                Camera.main.camera.GetComponent<CameraMoveAt>()._offsetX = 2;
+                //AddingMoreSpeed();
+                if(!_enablePlayerJump)GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>()._character2D.Jump.enabled = true;
                 _enablePlayerJump = true;
                 float d = Distance.DistanceNonAbs(_player.transform.position.x, _bus.transform.position.x);
                 //NGUIDebug.Log(d.ToString());
                 if (d <= -15) {
                     CurrentGameState = GameState.Lose;
-                    if (_enablePlayerJump) GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>()._controllerJumping.enabled = false;
+                    //if (_enablePlayerJump) GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>()._controllerJumping.enabled = false;
                     _enablePlayerJump = false;
                 }
+
+                
                 break;
             case GameState.Lose:
                 Camera.main.camera.GetComponent<CameraMoveAt>()._offsetX = -4;
@@ -53,18 +58,24 @@ public class GameManager : MonoBehaviour {
                 }
                 break;            
         }
-
-        CameraHorizontalExtent    = Camera.main.camera.orthographicSize * Screen.width / Screen.height;
-        EnvironmentAceleration    = _environmentAceleration;
-        EnvironmentSpeedSmoothing = _environmentSpeedSmoothing;
-        ForwardWay                = _forwardWay;      
+        ForwardWay = _forwardWay;
+        EnvironmentAceleration = _environmentAceleration;
+        EnvironmentSpeedSmoothing = _environmentSpeedSmoothing * ForwardWay;
 	}
+
+    void LateUpdate() {
+        CameraHorizontalExtent = Camera.main.camera.orthographicSize * Screen.width / Screen.height;
+    }
 
     void AddingMoreSpeed() {
         if (_environmentSpeedSmoothing >= 25) return;
         _environmentSpeedSmoothing += _environmentSpeedSmoothing * 0.001f;
+        if (_environmentSpeedSmoothing >= 5) {
+            if (!col) {
+                var t = GameObject.FindGameObjectWithTag("Trash");
+                GameObject.Instantiate(t, new Vector3((t.transform.position.x + GameManager.CameraHorizontalExtent), t.transform.position.y), t.transform.rotation);
+                col = !col;
+            }
+        }
     }
-
-    
-
 }

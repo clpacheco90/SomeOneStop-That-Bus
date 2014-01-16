@@ -97,9 +97,9 @@ public static class CharacterMovement{
         movement.hangTime = 0.0f;
         movement.speed = Mathf.Lerp(movement.speed, targetSpeed, curSmooth);
     }
-    //-----------------------------------------------------------------------------------------------------------------------------//	
+    //-----------------------------------------------------------------------------------------------------------------------------//
     public static void RefreshMovement(ControllerMovement movement, ControllerJumping jump, CharacterController controller) {
-        var lastPosition = movement.transform.position; // Save lastPosition for velocity calculation.
+        //var lastPosition = movement.transform.position; // Save lastPosition for velocity calculation.
         var currentMovementOffset = (movement.direction * movement.speed) + (new Vector3(0.0f, movement.verticalSpeed, 0.0f)); // Calculate actual motion
         currentMovementOffset *= Time.smoothDeltaTime; // We always want the movement to be framerate independent.  Multiplying by Time.smoothDeltaTime does this.
         movement.slideX = 0.0f;
@@ -238,5 +238,271 @@ public static class CharacterMovement{
         //movement.speed = Mathf.Lerp(movement.speed, targetSpeed, curSmooth);
         //t.Translate();
     }
+    //-----------------------------------------------------------------------------------------------------------------------------//	    
+
+    public static void GravityMovementX(CharacterController2D c) {
+        if (!c.Movement.enabled) return;
+        var h = Input.GetAxisRaw("Horizontal");
+        c.Movement.isMoving = Mathf.Abs(h) > 0.1f;
+        //Debug.Log(h);
+
+        if (c.Movement.isMoving) c.Movement.direction = new Vector3(h, 0, 0);
+
+        var curSmooth = 0.0f; // Smooth the speed based on the current target direction
+        var targetSpeed = Mathf.Min(Mathf.Abs(h), 1.0f); // Choose target speed
+
+        if (c.isGrounded) {
+            curSmooth = c.Movement.speedSmoothing * Time.smoothDeltaTime;
+            targetSpeed *= c.Movement.runSpeed;
+            c.Movement.hangTime = 0.0f;
+        } else {
+            curSmooth = c.Jump.speedSmoothing * Time.smoothDeltaTime;
+            targetSpeed *= c.Jump.jumpSpeed;
+            c.Movement.hangTime += Time.smoothDeltaTime;
+        }
+        c.Movement.speed = Mathf.Lerp(c.Movement.speed, targetSpeed, curSmooth);
+    }
     //-----------------------------------------------------------------------------------------------------------------------------//	
+    public static void GravityMovementY(CharacterController2D c) {
+
+        /*
+         * Only Move the vertical direction
+         * player get the same position of the object
+         * If jump was pressed, apply gravity
+         * 
+         */
+        var v = Input.GetAxisRaw("Vertical");
+
+        c.Movement.isClimbing = Mathf.Abs(v) > 0.1f;
+
+        //Debug.Log(h);
+        if (c.Movement.isClimbing) c.Movement.direction = new Vector3(0, v, 0);
+        var curSmooth = 0.0f; // Smooth the speed based on the current target direction
+        var targetSpeed = Mathf.Min(Mathf.Abs(v), 1.0f); // Choose target speed
+
+        curSmooth = c.Movement.speedSmoothing * Time.smoothDeltaTime;
+        targetSpeed *= c.Movement.runSpeed;
+        c.Movement.hangTime = 0.0f;
+        c.Movement.verticalSpeed = Mathf.Lerp(c.Movement.verticalSpeed, targetSpeed, curSmooth);
+    }
+    //-----------------------------------------------------------------------------------------------------------------------------//	
+    public static void RefreshMovement(CharacterController2D c) {
+        //var lastPosition          = c.Movement.transform.position; // Save lastPosition for velocity calculation.
+        var currentMovementOffset   = (c.Movement.direction * (c.Movement.speed)) + (new Vector3(0.0f, c.Movement.verticalSpeed, 0.0f)); // Calculate actual motion
+        currentMovementOffset      *= Time.smoothDeltaTime; // We always want the movement to be framerate independent.  Multiplying by Time.smoothDeltaTime does this.
+        c.Movement.slideX           = 0.0f;
+        c.Movement.collisionFlags   = CollisionFlags.CollidedBelow;
+        c.Move(currentMovementOffset);
+        //! movement.velocity     = (movement.transform.position - lastPosition) / Time.smoothDeltaTime; NOT IN USE
+    }
+    //-----------------------------------------------------------------------------------------------------------------------------//	
+    public static void ApplyGravity(CharacterController2D c) {
+        bool jumpButton;
+
+#if UNITY_ANDROID
+        jumpButton = (Input.touchCount > 0) ? true : false;
+#endif
+        jumpButton = Input.GetButton("Jump");
+
+        // When we reach the apex of the jump we send out a message		
+        if (c.Jump.jumping && !c.Jump.reachedApex && c.Movement.verticalSpeed <= 0.0) {
+            c.Jump.reachedApex = true;
+            //? DidJump(movement,jump);
+            //SendMessage ("DidJumpReachApex", SendMessageOptions.DontRequireReceiver);
+        }
+
+        // * When jumping up we don't apply gravity for some time when the user is holding the jump button
+        //   This gives more control over jump height by pressing the button longer
+        if (!c.Jump.touchedCeiling && IsTouchingCeiling(c.Movement)) {
+            c.Jump.touchedCeiling = true; // store this so we don't allow extra power jump to continue after character hits ceiling.
+        }
+        if (!jumpButton) {
+            c.Jump.buttonReleased = true;
+        }
+
+        var extraPowerJump = c.Jump.jumping && c.Movement.verticalSpeed > 0.0f && jumpButton && !c.Jump.buttonReleased && c.Movement.transform.position.y < c.Jump.lastStartHeight + c.Jump.extraHeight && !c.Jump.touchedCeiling;
+
+        if (extraPowerJump) {
+            return;
+        } else if (c.isGrounded) {
+            c.Movement.verticalSpeed = -c.Movement.gravity * Time.smoothDeltaTime;
+        } else {
+            c.Movement.verticalSpeed -= c.Movement.gravity * Time.smoothDeltaTime;
+        }
+
+        // Make sure we don't fall any faster than maxFallSpeed.  This gives our character a terminal velocity.
+        c.Movement.verticalSpeed = Mathf.Max(c.Movement.verticalSpeed, -c.Movement.maxFallSpeed);
+    }
+    //-----------------------------------------------------------------------------------------------------------------------------//	
+    public static void ApplyJumping(CharacterController2D c) {
+    
+        #if UNITY_ANDROID
+        if (Input.touchCount > 0) {
+            c.Jump.lastButtonTime = Time.time;
+        }
+        #endif
+        if (Input.GetButtonDown("Jump")) c.Jump.lastButtonTime = Time.time;
+
+        // Prevent jumping too fast after each other
+        if (c.Jump.lastTime + c.Jump.repeatTime > Time.time) return;
+
+        var isGrounded = c.isGrounded;
+
+        // Allow jumping slightly after the character leaves a ledge,
+        // as long as a jump hasn't occurred since we became ungrounded.
+        if (isGrounded || JustBecameUngrounded(c.Jump)) {
+            if (isGrounded) {
+                c.Jump.lastGroundedTime = Time.time;
+            }
+            // Jump
+            // - Only when pressing the button down
+            // - With a timeout so you can press the button slightly before landing	
+            if (c.Jump.enabled && Time.time < c.Jump.lastButtonTime + c.Jump.timeout) {
+                c.Movement.verticalSpeed = CalculateJumpVerticalSpeed(c.Movement, c.Jump.height);
+                // If we're on a platform, add the platform's velocity (times 1.4)
+                // to the character's velocity. We only do this if the platform
+                // is traveling upward.
+                if (c.Movement.activePlatform) {
+                    var apRb = c.Movement.activePlatform.rigidbody;
+                    if (apRb) {
+                        var apRbY = c.Movement.activePlatform.rigidbody.velocity.y;
+                        if (apRbY > 0.0f) {
+                            apRbY *= 1.4f;
+                            c.Movement.verticalSpeed += apRbY;
+                        }
+                    }
+                }
+                DidJump(c.Movement, c.Jump);
+            }
+        }
+    }
+    //-----------------------------------------------------------------------------------------------------------------------------//
 }
+#region 2DController
+//public static void GravityMovementX(CharacterController2D c) {
+//    if (!c.Movement.enabled) return;
+//    var h = Input.GetAxisRaw("Horizontal");
+//    c.Movement.isMoving = Mathf.Abs(h) > 0.1f;
+//    //Debug.Log(h);
+
+//    if (c.Movement.isMoving) c.Movement.direction = new Vector3(h, 0, 0);
+
+//    var curSmooth = 0.0f; // Smooth the speed based on the current target direction
+//    var targetSpeed = Mathf.Min(Mathf.Abs(h), 1.0f); // Choose target speed
+
+//    if (c.isGrounded) {
+//        curSmooth = c.Movement.speedSmoothing * Time.smoothDeltaTime;
+//        targetSpeed *= c.Movement.runSpeed;
+//        c.Movement.hangTime = 0.0f;
+//    } else {
+//        curSmooth = c.Jump.speedSmoothing * Time.smoothDeltaTime;
+//        targetSpeed *= c.Jump.jumpSpeed;
+//        c.Movement.hangTime += Time.smoothDeltaTime;
+//    }
+//    c.Movement.speed = Mathf.Lerp(c.Movement.speed, targetSpeed, curSmooth);
+//}
+////-----------------------------------------------------------------------------------------------------------------------------//	
+//public static void GravityMovementY(CharacterController2D c) {
+
+//    /*
+//     * Only Move the vertical direction
+//     * player get the same position of the object
+//     * If jump was pressed, apply gravity
+//     * 
+//     */
+//    var v = Input.GetAxisRaw("Vertical");
+
+//    c.Movement.isClimbing = Mathf.Abs(v) > 0.1f;
+
+//    //Debug.Log(h);
+//    if (c.Movement.isClimbing) c.Movement.direction = new Vector3(0, v, 0);
+//    var curSmooth = 0.0f; // Smooth the speed based on the current target direction
+//    var targetSpeed = Mathf.Min(Mathf.Abs(v), 1.0f); // Choose target speed
+
+//    curSmooth = c.Movement.speedSmoothing * Time.smoothDeltaTime;
+//    targetSpeed *= c.Movement.runSpeed;
+//    c.Movement.hangTime = 0.0f;
+//    c.Movement.verticalSpeed = Mathf.Lerp(c.Movement.verticalSpeed, targetSpeed, curSmooth);
+//}
+////-----------------------------------------------------------------------------------------------------------------------------//	
+//public static void RefreshMovement(CharacterController2D c) {
+//    //var lastPosition          = c.Movement.transform.position; // Save lastPosition for velocity calculation.
+//    var currentMovementOffset = (c.Movement.direction * (c.Movement.speed)) + (new Vector3(0.0f, c.Movement.verticalSpeed, 0.0f)); // Calculate actual motion
+//    currentMovementOffset *= Time.smoothDeltaTime; // We always want the movement to be framerate independent.  Multiplying by Time.smoothDeltaTime does this.
+//    c.Movement.slideX = 0.0f;
+//    c.Movement.collisionFlags = CollisionFlags.CollidedBelow;
+//    c.Move(currentMovementOffset);
+//    //! movement.velocity     = (movement.transform.position - lastPosition) / Time.smoothDeltaTime; NOT IN USE
+//}
+////-----------------------------------------------------------------------------------------------------------------------------//	
+//public static void ApplyGravity(CharacterController2D c) {
+//    var jumpButton = Input.GetButton("Jump");
+
+//    // When we reach the apex of the jump we send out a message		
+//    if (c.Jump.jumping && !c.Jump.reachedApex && c.Movement.verticalSpeed <= 0.0) {
+//        c.Jump.reachedApex = true;
+//        //? DidJump(movement,jump);
+//        //SendMessage ("DidJumpReachApex", SendMessageOptions.DontRequireReceiver);
+//    }
+
+//    // * When jumping up we don't apply gravity for some time when the user is holding the jump button
+//    //   This gives more control over jump height by pressing the button longer
+//    if (!c.Jump.touchedCeiling && IsTouchingCeiling(c.Movement)) {
+//        c.Jump.touchedCeiling = true; // store this so we don't allow extra power jump to continue after character hits ceiling.
+//    }
+//    if (!jumpButton) {
+//        c.Jump.buttonReleased = true;
+//    }
+
+//    var extraPowerJump = c.Jump.jumping && c.Movement.verticalSpeed > 0.0f && jumpButton && !c.Jump.buttonReleased && c.Movement.transform.position.y < c.Jump.lastStartHeight + c.Jump.extraHeight && !c.Jump.touchedCeiling;
+
+//    if (extraPowerJump) {
+//        return;
+//    } else if (c.isGrounded) {
+//        c.Movement.verticalSpeed = -c.Movement.gravity * Time.smoothDeltaTime;
+//    } else {
+//        c.Movement.verticalSpeed -= c.Movement.gravity * Time.smoothDeltaTime;
+//    }
+
+//    // Make sure we don't fall any faster than maxFallSpeed.  This gives our character a terminal velocity.
+//    c.Movement.verticalSpeed = Mathf.Max(c.Movement.verticalSpeed, -c.Movement.maxFallSpeed);
+//}
+////-----------------------------------------------------------------------------------------------------------------------------//	
+//public static void ApplyJumping(CharacterController2D c) {
+//        if (Input.GetButtonDown("Jump")) c.Jump.lastButtonTime = Time.time;
+
+//        // Prevent jumping too fast after each other
+//        if (c.Jump.lastTime + c.Jump.repeatTime > Time.time) return;
+
+//        var isGrounded = c.isGrounded;
+
+//        // Allow jumping slightly after the character leaves a ledge,
+//        // as long as a jump hasn't occurred since we became ungrounded.
+//        if (isGrounded || JustBecameUngrounded(c.Jump)) {
+//            if (isGrounded) {
+//                c.Jump.lastGroundedTime = Time.time;
+//            }
+//            // Jump
+//            // - Only when pressing the button down
+//            // - With a timeout so you can press the button slightly before landing	
+//            if (c.Jump.enabled && Time.time < c.Jump.lastButtonTime + c.Jump.timeout) {
+//                c.Movement.verticalSpeed = CalculateJumpVerticalSpeed(c.Movement, c.Jump.height);
+//                // If we're on a platform, add the platform's velocity (times 1.4)
+//                // to the character's velocity. We only do this if the platform
+//                // is traveling upward.
+//                if (c.Movement.activePlatform) {
+//                    var apRb = c.Movement.activePlatform.rigidbody;
+//                    if (apRb) {
+//                        var apRbY = c.Movement.activePlatform.rigidbody.velocity.y;
+//                        if (apRbY > 0.0f) {
+//                            apRbY *= 1.4f;
+//                            c.Movement.verticalSpeed += apRbY;
+//                        }
+//                    }
+//                }
+//                DidJump(c.Movement, c.Jump);
+//            }
+//        }
+//    }
+//    //-----------------------------------------------------------------------------------------------------------------------------//
+#endregion    

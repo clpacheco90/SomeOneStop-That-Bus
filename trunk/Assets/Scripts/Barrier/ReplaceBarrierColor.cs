@@ -19,10 +19,10 @@ public class ReplaceBarrierColor : ReplaceBarrier {
 	
 	// Update is called once per frame
 	void Update () {
-        if (_instance == ReplaceBarrier.Instance.New) {
-            _currentColor = _colors.Rand(_previousColor);
-            _sprite.VertexColor = _currentColor;
-        }
+        //if (_instance == ReplaceBarrier.Instance.New) {
+        //    _currentColor = _colors.Rand(_previousColor);
+        //    _sprite.VertexColor = _currentColor;
+        //}
 
         base.Update();
 	}    
