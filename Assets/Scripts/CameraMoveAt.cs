@@ -7,13 +7,13 @@ public class CameraMoveAt : MonoBehaviour {
 	public float _offsetX;	
 	public float _offsetY;	
 	public float _smoothTime;
+	public Transform _gameObj;
 	private float _h;
 	private float _v;	
 	private Camera _cam;
 	private Vector3 _velocity = Vector3.zero;
     private float _smoothDampX;
     private float _smoothDampY;
-	[SerializeField]private Transform _gameObj;
 //-----------------------------------------------------------------------------------------------------------------------------//					
 	void Start () {		
 		_cam = this.gameObject.camera;
