@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
 public class ReplaceObjectManager : MonoBehaviour {
 
     public Transform[] _childrens;
@@ -17,7 +18,7 @@ public class ReplaceObjectManager : MonoBehaviour {
 
 
 	// Use this for initialization
-	public void Awake () {
+	public void Join () {
         _childrens = new Transform[this.gameObject.transform.childCount];
         for (int i = 0; i < this.gameObject.transform.childCount; i++) _childrens[i] = this.gameObject.transform.GetChild(i);
 

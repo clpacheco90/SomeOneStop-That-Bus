@@ -47,7 +47,7 @@ public static class CharacterMovement{
 		jump.reachedApex 		= false;
 		jump.lastTime 			= Time.time;
 		jump.lastStartHeight 	= movement.transform.position.y;
-		jump.lastButtonTime 	= -10;
+		jump.lastButtonTime 	= 0;
 		jump.touchedCeiling 	= false;
 		jump.buttonReleased 	= false;
 	}
@@ -307,7 +307,7 @@ public static class CharacterMovement{
         // When we reach the apex of the jump we send out a message		
         if (c.Jump.jumping && !c.Jump.reachedApex && c.Movement.verticalSpeed <= 0.0) {
             c.Jump.reachedApex = true;
-            //? DidJump(movement,jump);
+            DidJump(c.Movement,c.Jump);
             //SendMessage ("DidJumpReachApex", SendMessageOptions.DontRequireReceiver);
         }
 
@@ -318,30 +318,35 @@ public static class CharacterMovement{
         }
         if (!jumpButton) {
             c.Jump.buttonReleased = true;
-        }
+            //Debug.Log("Release");
+        } 
 
         var extraPowerJump = c.Jump.jumping && c.Movement.verticalSpeed > 0.0f && jumpButton && !c.Jump.buttonReleased && c.Movement.transform.position.y < c.Jump.lastStartHeight + c.Jump.extraHeight && !c.Jump.touchedCeiling;
 
         if (extraPowerJump) {
             return;
         } else if (c.isGrounded) {
-            c.Movement.verticalSpeed = -c.Movement.gravity * Time.smoothDeltaTime;
+            c.Movement.verticalSpeed = -c.Movement.gravity * Time.smoothDeltaTime;            
         } else {
             c.Movement.verticalSpeed -= c.Movement.gravity * Time.smoothDeltaTime;
         }
-
         // Make sure we don't fall any faster than maxFallSpeed.  This gives our character a terminal velocity.
         c.Movement.verticalSpeed = Mathf.Max(c.Movement.verticalSpeed, -c.Movement.maxFallSpeed);
     }
     //-----------------------------------------------------------------------------------------------------------------------------//	
     public static void ApplyJumping(CharacterController2D c) {
     
-        #if UNITY_ANDROID
-        if (Input.touchCount > 0) {
+        //#if UNITY_ANDROID
+        //if (Input.touchCount > 0) {
+        //    c.Jump.lastButtonTime = Time.time;
+        //}
+        //#endif
+        if (Input.GetButtonDown("Jump")) {
             c.Jump.lastButtonTime = Time.time;
+            //NGUIDebug.Log(c.Jump.lastButtonTime.ToString());
         }
-        #endif
-        if (Input.GetButtonDown("Jump")) c.Jump.lastButtonTime = Time.time;
+            //NGUIDebug.Log("time"+ Time.time);
+        //NGUIDebug.Log(c.Jump.lastButtonTime.ToString());
 
         // Prevent jumping too fast after each other
         if (c.Jump.lastTime + c.Jump.repeatTime > Time.time) return;
@@ -354,27 +359,19 @@ public static class CharacterMovement{
             if (isGrounded) {
                 c.Jump.lastGroundedTime = Time.time;
             }
+            if (c.Jump.justBecameUngrounded) {
+                c.Movement.verticalSpeed = 0;
+            }
             // Jump
             // - Only when pressing the button down
             // - With a timeout so you can press the button slightly before landing	
             if (c.Jump.enabled && Time.time < c.Jump.lastButtonTime + c.Jump.timeout) {
+                NGUIDebug.Log(c.Jump.justBecameUngrounded.ToString());
                 c.Movement.verticalSpeed = CalculateJumpVerticalSpeed(c.Movement, c.Jump.height);
-                // If we're on a platform, add the platform's velocity (times 1.4)
-                // to the character's velocity. We only do this if the platform
-                // is traveling upward.
-                if (c.Movement.activePlatform) {
-                    var apRb = c.Movement.activePlatform.rigidbody;
-                    if (apRb) {
-                        var apRbY = c.Movement.activePlatform.rigidbody.velocity.y;
-                        if (apRbY > 0.0f) {
-                            apRbY *= 1.4f;
-                            c.Movement.verticalSpeed += apRbY;
-                        }
-                    }
-                }
                 DidJump(c.Movement, c.Jump);
             }
         }
+        
     }
     //-----------------------------------------------------------------------------------------------------------------------------//
 }
