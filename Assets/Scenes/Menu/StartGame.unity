@@ -1793,9 +1793,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blinkSeconds: .200000003
   seconds: 0
-  numberOfBlinks: 0
-  blinkRate: 0
-  vblinkRate: 0
 --- !u!43 &984571822
 Mesh:
   m_ObjectHideFlags: 0
@@ -1949,7 +1946,7 @@ GameObject:
   - 4: {fileID: 1004839050}
   m_Layer: 0
   m_Name: Bus
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5232,8 +5229,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   bus: {fileID: 0}
-  environmentAceleration: 0
-  environmentSpeedSmoothing: 0
+  environmentAceleration: 1
+  environmentSpeedSmoothing: 6
   enablePlayerJump: 0
   forwardWay: -1
 --- !u!114 &1865319113

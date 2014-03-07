@@ -25,19 +25,46 @@ public class GameManager : MonoBehaviour {
     public static GameState CurrentGameState;
 
     private bool col;
+
+
+    private CameraPivot cameraPivot;
+
     void Start() {
         CurrentGameState = GameState.Start;
-        //player           = GameObject.FindGameObjectWithTag("Player");
+        //player         = GameObject.FindGameObjectWithTag("Player");
         bus              = GameObject.FindGameObjectWithTag("Bus");
+        cameraPivot      = new CameraPivot();
     }
-	// Update is called once per frame
+	
+    // Update is called once per frame
     void Update() { 
-        if(Application.loadedLevelName.Equals("StartGame")) goto MoveObjects;
+        //if(Application.loadedLevelName.Equals("StartGame")) goto MoveObjects;
 
-        MoveObjects:
-        ForwardWay = forwardWay;
-        EnvironmentAceleration = environmentAceleration;
+        //MoveObjects:
+        switch (CurrentGameState) {
+            case GameState.Start:
+                StartState();
+                break;
+            case GameState.Intro:
+                IntroState();
+                break;
+            case GameState.OnGame:
+                break;
+            case GameState.Lose:
+                break;         
+        }
+        ForwardWay                = forwardWay;
+        EnvironmentAceleration    = environmentAceleration;
         EnvironmentSpeedSmoothing = environmentSpeedSmoothing * ForwardWay;
+    }
+
+    private void IntroState() {
+        if (Distance.DistanceAbs(bus.transform.position.x, cameraPivot._right.x) > .1f) bus.transform.position += Vector3.right * (Time.smoothDeltaTime * 2);
+        //Debug.Log(Distance.DistanceAbs(bus.transform.position.x, cameraPivot._right.x).ToString());
+    }
+
+    private void StartState() {
+        //throw new System.NotImplementedException();
     }
     //void Update() {
     //    switch (CurrentGameState) {
