@@ -1,17 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour {
+public class PlayerController2D : MonoBehaviour {
     //-----------------------------------------------------------------------------------------------------------------------------//	
-    public CharacterController character;
-    public ControllerMovement movement;
-    public ControllerJumping jump;
+    public CharacterController2D _character2D = new CharacterController2D();
+
     //delegate void Controllers(ControllerMovement m, ControllerJumping j, CharacterController c);
-    delegate void Controllers(ControllerMovement m, ControllerJumping j, CharacterController c);
+    delegate void Controllers(CharacterController2D c);
 	private Controllers _controllers;
     //-----------------------------------------------------------------------------------------------------------------------------//	
 	void Awake () {
+        _character2D.StartControllers(this.gameObject);
         _controllers += CharacterMovement.GravityMovementX;
         _controllers += CharacterMovement.ApplyJumping;
         _controllers += CharacterMovement.ApplyGravity;
@@ -20,11 +19,13 @@ public class PlayerController : MonoBehaviour {
     //-----------------------------------------------------------------------------------------------------------------------------//	
 	void Update () {
         //NGUIDebug.Log(_controllerMovement.direction.ToString());
+        _character2D.UpdateControllers();		
 	}
     //-----------------------------------------------------------------------------------------------------------------------------//	
 	void FixedUpdate(){
         //_controllers(_character2D.Movement, _character2D.Jump, _character2D.Controller);
-        _controllers(movement,jump,character);
+        _character2D.Movement.direction = new Vector3(1, 0, 0);
+        _controllers(_character2D);
 	}
     //-----------------------------------------------------------------------------------------------------------------------------//	
 

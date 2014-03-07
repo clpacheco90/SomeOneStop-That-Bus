@@ -24,7 +24,7 @@ public class ReplaceBarrierColor : ReplaceBarrier {
         //    _sprite.VertexColor = _currentColor;
         //}
 
-        base.Update();
+        //base.Update();
 	}    
 }
 public static class StringExtension {

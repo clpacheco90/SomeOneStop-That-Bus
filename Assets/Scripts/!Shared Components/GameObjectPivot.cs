@@ -5,19 +5,20 @@ public class GameObjectPivot {
 
     private GameObject _go;
     private Uni2DSprite _sprite;    
+    private float _width;
    
     public GameObjectPivot(GameObject gameObject, Uni2DSprite sprite) {
         this._go     = gameObject;
         this._sprite = sprite;
+        this._width = this._sprite.SpriteSettings.SpriteWidth;
     }
 
     public float Left() {
-        return this._go.transform.position.x - (this._sprite.SpriteSettings.SpriteWidth * .5f);
+        return this._go.transform.position.x - (this._width * .5f);
     }
 
     public float Right() {
-        //return Camera.main.ScreenToWorldPoint(new Vector3(this._go.transform.position.x + this._sprite.SpriteSettings.SpriteWidth, this._go.transform.position.y + this._sprite.SpriteSettings.SpriteHeight, Camera.main.nearClipPlane));
-        return this._go.transform.position.x + (this._sprite.SpriteSettings.SpriteWidth * .5f);
+        return this._go.transform.position.x + (this._width * .5f);
     }
 
     public float Center() {
