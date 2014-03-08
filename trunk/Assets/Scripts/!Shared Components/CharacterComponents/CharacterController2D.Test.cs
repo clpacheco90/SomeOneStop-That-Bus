@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/* using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
@@ -28,3 +28,4 @@ public class CharacterController2D {
         this.PlayerObject.transform.position += pos;
     }
 }
+ */
