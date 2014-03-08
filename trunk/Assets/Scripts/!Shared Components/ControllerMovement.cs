@@ -3,7 +3,7 @@ using System.Collections;
 
 [System.Serializable]
 public class ControllerMovement {
-//-----------------------------------------------------------------------------------------------------------------------------//			
+    //-----------------------------------------------------------------------------------------------------------------------------//			
     public bool enabled                                 = true; // Can the character jump?
     public float runSpeed                               = 7.0f;// The speed when running 	
     public float slideFactor                            = 0.05f;	// The speed when sliding up and around corners 
@@ -22,6 +22,12 @@ public class ControllerMovement {
 	[System.NonSerializedAttribute] public Vector3 velocity; // We will keep track of an approximation of the character's current velocity, so that we return it from GetVelocity () for our camera to use for prediction.
     [System.NonSerializedAttribute] public float hangTime           = 0.0f; // This will keep track of how long we have we been in the air (not grounded)	
 	[System.NonSerializedAttribute]	public Transform transform      = null;	
-	[System.NonSerializedAttribute]	public Transform activePlatform = null;	
-//-----------------------------------------------------------------------------------------------------------------------------//
+	[System.NonSerializedAttribute]	public Transform activePlatform = null;
+    //-----------------------------------------------------------------------------------------------------------------------------//
+    public ControllerMovement(Transform transform) {
+        this.transform = transform;
+    }
+    public ControllerMovement() {
+    }
+    //-----------------------------------------------------------------------------------------------------------------------------//
 }
