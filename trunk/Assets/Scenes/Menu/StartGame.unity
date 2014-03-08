@@ -14,7 +14,7 @@ SceneSettings:
 RenderSettings:
   m_Fog: 0
   m_FogColor: {r: .5, g: .5, b: .5, a: 1}
-  m_FogMode: 3
+  m_FogMode: 1
   m_FogDensity: .00999999978
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
@@ -110,29 +110,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 76714239}
   - 20: {fileID: 76714238}
-  - 81: {fileID: 76714235}
-  - 92: {fileID: 76714233}
   m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
+  m_Name: Camera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!92 &76714233
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 76714232}
-  m_Enabled: 1
---- !u!81 &76714235
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 76714232}
-  m_Enabled: 1
 --- !u!20 &76714238
 Camera:
   m_ObjectHideFlags: 0
@@ -141,7 +125,7 @@ Camera:
   m_GameObject: {fileID: 76714232}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 3
   m_BackGroundColor: {r: .199502572, g: .466881782, b: .904411793, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -154,10 +138,10 @@ Camera:
   field of view: 40
   orthographic: 1
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 256
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
@@ -172,6 +156,33 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
+  m_Father: {fileID: 995508007}
+--- !u!1 &88142038
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 88142039}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &88142039
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 88142038}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.38912487, y: -3.07120132, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1914878297}
   m_Father: {fileID: 1859210195}
 --- !u!1 &144909013
 GameObject:
@@ -362,8 +373,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 2.38418579e-07, y: 2.38418579e-07, z: 0}
-      m_Extent: {x: 3.625, y: 2.125, z: 0}
+      m_Center: {x: 4.76837158e-07, y: 3.57627869e-07, z: 0}
+      m_Extent: {x: 5.80000019, y: 3.4000001, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -429,7 +440,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 144
-    _typelessdata: ffff67c0ffff07c0000000000000000000000000000080bfa3a3a3ff000000000000000001006840ffff07c0000000000000000000000000000080bfa3a3a3ff0000803f000000000100684001000840000000000000000000000000000080bfa3a3a3ff0000803f0000803fffff67c001000840000000000000000000000000000080bfa3a3a3ff000000000000803f
+    _typelessdata: 9999b9c0989959c0000000000000000000000000000080bfa3a3a3ff00000000000000009b99b940989959c0000000000000000000000000000080bfa3a3a3ff0000803f000000009b99b9409b995940000000000000000000000000000080bfa3a3a3ff0000803f0000803f9999b9c09b995940000000000000000000000000000080bfa3a3a3ff000000000000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -486,8 +497,8 @@ Mesh:
       m_Data: 
       m_BitSize: 0
   m_LocalAABB:
-    m_Center: {x: 2.38418579e-07, y: 2.38418579e-07, z: 0}
-    m_Extent: {x: 3.625, y: 2.125, z: 0}
+    m_Center: {x: 4.76837158e-07, y: 3.57627869e-07, z: 0}
+    m_Extent: {x: 5.80000019, y: 3.4000001, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
 --- !u!21 &283025172
@@ -535,8 +546,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 2.98023224e-08, y: 2.98023224e-08, z: 0}
-      m_Extent: {x: .375, y: .375, z: 0}
+      m_Center: {x: 5.96046448e-08, y: 5.96046448e-08, z: 0}
+      m_Extent: {x: .525000036, y: .525000036, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -602,7 +613,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 144
-    _typelessdata: ffffbfbeffffbfbe000000000000000000000000000080bfffffffff00000000000000000100c03effffbfbe000000000000000000000000000080bfffffffff0000803f000000000100c03e0100c03e000000000000000000000000000080bfffffffff0000803f0000803fffffbfbe0100c03e000000000000000000000000000080bfffffffff000000000000803f
+    _typelessdata: 666606bf666606bf000000000000000000000000000080bfffffffff00000000000000006866063f666606bf000000000000000000000000000080bfffffffff0000803f000000006866063f6866063f000000000000000000000000000080bfffffffff0000803f0000803f666606bf6866063f000000000000000000000000000080bfffffffff000000000000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -659,8 +670,8 @@ Mesh:
       m_Data: 
       m_BitSize: 0
   m_LocalAABB:
-    m_Center: {x: 2.98023224e-08, y: 2.98023224e-08, z: 0}
-    m_Extent: {x: .375, y: .375, z: 0}
+    m_Center: {x: 5.96046448e-08, y: 5.96046448e-08, z: 0}
+    m_Extent: {x: .525000036, y: .525000036, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
 --- !u!1 &354077804
@@ -822,7 +833,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 454055525}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.18053436, y: 0, z: 0}
+  m_LocalPosition: {x: 52.5805321, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2095291503}
@@ -884,7 +895,7 @@ MonoBehaviour:
       m_rTexture: {fileID: 2800000, guid: cc3f48d05cb5d464e9ae47982054274f, type: 3}
     atlas: {fileID: 0}
     sharedMaterial: {fileID: 0}
-    spriteScale: 5
+    spriteScale: 8
     renderMesh: 0
     usePhysicBuildSettings: 0
     pivotType: 5
@@ -921,7 +932,7 @@ MonoBehaviour:
     renderMeshMaterial: {fileID: 445033953}
     generatedMaterial: {fileID: 445033953}
     pivotCoords: {x: 72.5, y: 31.5}
-    scale: .049999997
+    scale: .0799999982
     colliderTriangleCount: 0
     meshCollidersRootGameObject: {fileID: 0}
     meshCollidersList: []
@@ -958,7 +969,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 459535464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.6541767, y: -.0755653381, z: 12}
+  m_LocalPosition: {x: -87.7762833, y: 1.85163116, z: 12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 856861214}
@@ -1133,7 +1144,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 714269891}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.0999985, y: 0, z: 0}
+  m_LocalPosition: {x: 99.5099945, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 459535465}
@@ -1195,7 +1206,7 @@ MonoBehaviour:
       m_rTexture: {fileID: 2800000, guid: ea2b05288d93e574ea0e4dfbce7682bf, type: 3}
     atlas: {fileID: 0}
     sharedMaterial: {fileID: 0}
-    spriteScale: 5
+    spriteScale: 8
     renderMesh: 0
     usePhysicBuildSettings: 0
     pivotType: 5
@@ -1232,7 +1243,7 @@ MonoBehaviour:
     renderMeshMaterial: {fileID: 1188669409}
     generatedMaterial: {fileID: 1188669409}
     pivotCoords: {x: 160.5, y: 50}
-    scale: .049999997
+    scale: .0799999982
     colliderTriangleCount: 0
     meshCollidersRootGameObject: {fileID: 0}
     meshCollidersList: []
@@ -1474,7 +1485,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 856861213}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 48.1499977, y: 0, z: 0}
+  m_LocalPosition: {x: 125.189995, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 459535465}
@@ -1523,7 +1534,7 @@ MonoBehaviour:
       m_rTexture: {fileID: 2800000, guid: ea2b05288d93e574ea0e4dfbce7682bf, type: 3}
     atlas: {fileID: 0}
     sharedMaterial: {fileID: 0}
-    spriteScale: 5
+    spriteScale: 8
     renderMesh: 0
     usePhysicBuildSettings: 0
     pivotType: 5
@@ -1560,7 +1571,7 @@ MonoBehaviour:
     renderMeshMaterial: {fileID: 1823677339}
     generatedMaterial: {fileID: 1823677339}
     pivotCoords: {x: 160.5, y: 50}
-    scale: .049999997
+    scale: .0799999982
     colliderTriangleCount: 0
     meshCollidersRootGameObject: {fileID: 0}
     meshCollidersList: []
@@ -1601,8 +1612,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 2.38418579e-07, y: 0, z: 0}
-      m_Extent: {x: 3.625, y: 1.57499993, z: 0}
+      m_Center: {x: 4.76837158e-07, y: 0, z: 0}
+      m_Extent: {x: 5.80000305, y: 2.5200007, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -1668,7 +1679,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 144
-    _typelessdata: ffff67c09999c9bf000000000000000000000000000080bfffe8e8ff0000000000000000010068409999c9bf000000000000000000000000000080bfffe8e8ff0000803f00000000010068409999c93f000000000000000000000000000080bfffe8e8ff0000803f0000803fffff67c09999c93f000000000000000000000000000080bfffe8e8ff000000000000803f
+    _typelessdata: 9f99b9c0b14721c0000000000000000000000000000080bfffe8e8ff0000000000000000a199b940b14721c0000000000000000000000000000080bfffe8e8ff0000803f00000000a199b940b1472140000000000000000000000000000080bfffe8e8ff0000803f0000803f9f99b9c0b1472140000000000000000000000000000080bfffe8e8ff000000000000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -1725,8 +1736,8 @@ Mesh:
       m_Data: 
       m_BitSize: 0
   m_LocalAABB:
-    m_Center: {x: 2.38418579e-07, y: 0, z: 0}
-    m_Extent: {x: 3.625, y: 1.57499993, z: 0}
+    m_Center: {x: 4.76837158e-07, y: 0, z: 0}
+    m_Extent: {x: 5.80000305, y: 2.5200007, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
 --- !u!1 &946113313
@@ -1793,6 +1804,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blinkSeconds: .200000003
   seconds: 0
+--- !u!1 &950246210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 950246211}
+  m_Layer: 0
+  m_Name: CameraFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &950246211
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 950246210}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 995508007}
+  m_Father: {fileID: 1859210195}
 --- !u!43 &984571822
 Mesh:
   m_ObjectHideFlags: 0
@@ -1936,6 +1974,109 @@ Mesh:
     m_Extent: {x: 3.19999981, y: .799999952, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
+--- !u!1 &995508006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 995508007}
+  - 20: {fileID: 995508010}
+  - 81: {fileID: 995508009}
+  - 92: {fileID: 995508008}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &995508007
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 995508006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 76714239}
+  m_Father: {fileID: 950246211}
+--- !u!92 &995508008
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 995508006}
+  m_Enabled: 1
+--- !u!81 &995508009
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 995508006}
+  m_Enabled: 1
+--- !u!20 &995508010
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 995508006}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 3
+  m_BackGroundColor: {r: .199502572, g: .466881782, b: .904411793, a: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: .100000001
+  far clip plane: 20
+  field of view: 40
+  orthographic: 1
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967039
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_HDR: 0
+  m_OcclusionCulling: 0
+--- !u!21 &1004542426
+Material:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: mat_Generated_Sprite_intro
+  m_Shader: {fileID: 203, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: []
+  m_CustomRenderQueue: -1
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 2800000, guid: 0981d5332fe4029439ff01403aef8b95, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _InvFade
+        second: 1
+    m_Colors:
+      data:
+        first:
+          name: _TintColor
+        second: {r: .5, g: .5, b: .5, a: .5}
 --- !u!1 &1004839049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1944,7 +2085,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1004839050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bus
   m_TagString: Bus
   m_Icon: {fileID: 0}
@@ -1980,8 +2121,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 2.38418579e-07, y: 0, z: 0}
-      m_Extent: {x: 3.625, y: 1.57499993, z: 0}
+      m_Center: {x: 7.15255737e-07, y: 0, z: 0}
+      m_Extent: {x: 5.80000687, y: 2.52000237, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -2047,7 +2188,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 144
-    _typelessdata: ffff67c09999c9bf000000000000000000000000000080bfffe8e8ff0000000000000000010068409999c9bf000000000000000000000000000080bfffe8e8ff0000803f00000000010068409999c93f000000000000000000000000000080bfffe8e8ff0000803f0000803fffff67c09999c93f000000000000000000000000000080bfffe8e8ff000000000000803f
+    _typelessdata: a799b9c0b84721c0000000000000000000000000000080bfffe8e8ff0000000000000000aa99b940b84721c0000000000000000000000000000080bfffe8e8ff0000803f00000000aa99b940b8472140000000000000000000000000000080bfffe8e8ff0000803f0000803fa799b9c0b8472140000000000000000000000000000080bfffe8e8ff000000000000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -2104,8 +2245,8 @@ Mesh:
       m_Data: 
       m_BitSize: 0
   m_LocalAABB:
-    m_Center: {x: 2.38418579e-07, y: 0, z: 0}
-    m_Extent: {x: 3.625, y: 1.57499993, z: 0}
+    m_Center: {x: 7.15255737e-07, y: 0, z: 0}
+    m_Extent: {x: 5.80000687, y: 2.52000237, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
 --- !u!43 &1055604695
@@ -2266,8 +2407,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 2.38418579e-07, y: 2.38418579e-07, z: 0}
-      m_Extent: {x: 3.625, y: 2.125, z: 0}
+      m_Center: {x: 4.76837158e-07, y: 3.57627869e-07, z: 0}
+      m_Extent: {x: 5.80000019, y: 3.4000001, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -2333,7 +2474,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 144
-    _typelessdata: ffff67c0ffff07c0000000000000000000000000000080bfa3a3a3ff000000000000000001006840ffff07c0000000000000000000000000000080bfa3a3a3ff0000803f000000000100684001000840000000000000000000000000000080bfa3a3a3ff0000803f0000803fffff67c001000840000000000000000000000000000080bfa3a3a3ff000000000000803f
+    _typelessdata: 9999b9c0989959c0000000000000000000000000000080bfa3a3a3ff00000000000000009b99b940989959c0000000000000000000000000000080bfa3a3a3ff0000803f000000009b99b9409b995940000000000000000000000000000080bfa3a3a3ff0000803f0000803f9999b9c09b995940000000000000000000000000000080bfa3a3a3ff000000000000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -2390,8 +2531,8 @@ Mesh:
       m_Data: 
       m_BitSize: 0
   m_LocalAABB:
-    m_Center: {x: 2.38418579e-07, y: 2.38418579e-07, z: 0}
-    m_Extent: {x: 3.625, y: 2.125, z: 0}
+    m_Center: {x: 4.76837158e-07, y: 3.57627869e-07, z: 0}
+    m_Extent: {x: 5.80000019, y: 3.4000001, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
 --- !u!43 &1102061357
@@ -2409,8 +2550,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 2.98023224e-08, y: 2.98023224e-08, z: 0}
-      m_Extent: {x: .375, y: .375, z: 0}
+      m_Center: {x: 5.96046448e-08, y: 5.96046448e-08, z: 0}
+      m_Extent: {x: .525000036, y: .525000036, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -2476,7 +2617,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 144
-    _typelessdata: ffffbfbeffffbfbe000000000000000000000000000080bfffffffff00000000000000000100c03effffbfbe000000000000000000000000000080bfffffffff0000803f000000000100c03e0100c03e000000000000000000000000000080bfffffffff0000803f0000803fffffbfbe0100c03e000000000000000000000000000080bfffffffff000000000000803f
+    _typelessdata: 666606bf666606bf000000000000000000000000000080bfffffffff00000000000000006866063f666606bf000000000000000000000000000080bfffffffff0000803f000000006866063f6866063f000000000000000000000000000080bfffffffff0000803f0000803f666606bf6866063f000000000000000000000000000080bfffffffff000000000000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -2533,8 +2674,8 @@ Mesh:
       m_Data: 
       m_BitSize: 0
   m_LocalAABB:
-    m_Center: {x: 2.98023224e-08, y: 2.98023224e-08, z: 0}
-    m_Extent: {x: .375, y: .375, z: 0}
+    m_Center: {x: 5.96046448e-08, y: 5.96046448e-08, z: 0}
+    m_Extent: {x: .525000036, y: .525000036, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
 --- !u!114 &1109248998
@@ -2626,7 +2767,7 @@ MonoBehaviour:
       m_rTexture: {fileID: 2800000, guid: de5dd5e0c6c63ef478c5968e1d83cd47, type: 3}
     atlas: {fileID: 0}
     sharedMaterial: {fileID: 0}
-    spriteScale: 5
+    spriteScale: 8
     renderMesh: 0
     usePhysicBuildSettings: 0
     pivotType: 5
@@ -2663,7 +2804,7 @@ MonoBehaviour:
     renderMeshMaterial: {fileID: 635177055}
     generatedMaterial: {fileID: 635177055}
     pivotCoords: {x: 72.5, y: 31.5}
-    scale: .049999997
+    scale: .0799999982
     colliderTriangleCount: 0
     meshCollidersRootGameObject: {fileID: 0}
     meshCollidersList: []
@@ -2683,7 +2824,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1114643575}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.419466, y: 0, z: 0}
+  m_LocalPosition: {x: 17.7805347, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 2095291503}
@@ -2698,7 +2839,7 @@ GameObject:
   - 114: {fileID: 1129418487}
   - 23: {fileID: 1129418486}
   - 33: {fileID: 1129418485}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite_BusV2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2712,7 +2853,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1129418483}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: .412971497, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1004839050}
@@ -2761,7 +2902,7 @@ MonoBehaviour:
       m_rTexture: {fileID: 2800000, guid: 3296085c25511be41a8393e6701bd083, type: 3}
     atlas: {fileID: 0}
     sharedMaterial: {fileID: 0}
-    spriteScale: 5
+    spriteScale: 7
     renderMesh: 0
     usePhysicBuildSettings: 0
     pivotType: 5
@@ -2798,7 +2939,7 @@ MonoBehaviour:
     renderMeshMaterial: {fileID: 422695078}
     generatedMaterial: {fileID: 422695078}
     pivotCoords: {x: 51, y: 22.5}
-    scale: .049999997
+    scale: .0700000003
     colliderTriangleCount: 0
     meshCollidersRootGameObject: {fileID: 0}
     meshCollidersList: []
@@ -3006,7 +3147,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1163983941}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.01946449, y: 0, z: 0}
+  m_LocalPosition: {x: 40.9805336, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2095291503}
@@ -3068,7 +3209,7 @@ MonoBehaviour:
       m_rTexture: {fileID: 2800000, guid: cc3f48d05cb5d464e9ae47982054274f, type: 3}
     atlas: {fileID: 0}
     sharedMaterial: {fileID: 0}
-    spriteScale: 5
+    spriteScale: 8
     renderMesh: 0
     usePhysicBuildSettings: 0
     pivotType: 5
@@ -3105,7 +3246,7 @@ MonoBehaviour:
     renderMeshMaterial: {fileID: 1512417589}
     generatedMaterial: {fileID: 1512417589}
     pivotCoords: {x: 72.5, y: 31.5}
-    scale: .049999997
+    scale: .0799999982
     colliderTriangleCount: 0
     meshCollidersRootGameObject: {fileID: 0}
     meshCollidersList: []
@@ -3144,7 +3285,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1164947271}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.419466, y: 0, z: 0}
+  m_LocalPosition: {x: 17.7805347, y: 2.29997826, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 1168258607}
@@ -3206,7 +3347,7 @@ MonoBehaviour:
       m_rTexture: {fileID: 2800000, guid: cc05ffb75c540bb4fb160bc0ea52a87b, type: 3}
     atlas: {fileID: 0}
     sharedMaterial: {fileID: 0}
-    spriteScale: 5
+    spriteScale: 8
     renderMesh: 0
     usePhysicBuildSettings: 0
     pivotType: 5
@@ -3243,7 +3384,7 @@ MonoBehaviour:
     renderMeshMaterial: {fileID: 1191570384}
     generatedMaterial: {fileID: 1191570384}
     pivotCoords: {x: 72.5, y: 42.5}
-    scale: .049999997
+    scale: .0799999982
     colliderTriangleCount: 0
     meshCollidersRootGameObject: {fileID: 0}
     meshCollidersList: []
@@ -3280,7 +3421,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1168258606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.8117485, y: -.899999976, z: 11}
+  m_LocalPosition: {x: -22.9880905, y: -1.08231211, z: 11}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 2057146265}
@@ -3458,8 +3599,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 0, y: 2.38418579e-07, z: 0}
-      m_Extent: {x: 8.02499962, y: 2.5, z: 0}
+      m_Center: {x: 0, y: 3.57627869e-07, z: 0}
+      m_Extent: {x: 12.8399992, y: 4, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -3525,7 +3666,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 144
-    _typelessdata: 666600c1ffff1fc0000000000000000000000000ffff7fbfaeaeaeff000000000000000066660041ffff1fc0000000000000000000000000ffff7fbfaeaeaeff0000803f000000006666004101002040000000000000000000000000ffff7fbfaeaeaeff0000803f0000803f666600c101002040000000000000000000000000ffff7fbfaeaeaeff000000000000803f
+    _typelessdata: a3704dc1ffff7fc0000000000000000000000000ffff7fbfaeaeaeff0000000000000000a3704d41ffff7fc0000000000000000000000000ffff7fbfaeaeaeff0000803f00000000a3704d4101008040000000000000000000000000ffff7fbfaeaeaeff0000803f0000803fa3704dc101008040000000000000000000000000ffff7fbfaeaeaeff000000000000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -3582,8 +3723,8 @@ Mesh:
       m_Data: 
       m_BitSize: 0
   m_LocalAABB:
-    m_Center: {x: 0, y: 2.38418579e-07, z: 0}
-    m_Extent: {x: 8.02499962, y: 2.5, z: 0}
+    m_Center: {x: 0, y: 3.57627869e-07, z: 0}
+    m_Extent: {x: 12.8399992, y: 4, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
 --- !u!114 &1469932855
@@ -3655,8 +3796,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 2.38418579e-07, y: 0, z: 0}
-      m_Extent: {x: 3.625, y: 1.57499993, z: 0}
+      m_Center: {x: 4.76837158e-07, y: 0, z: 0}
+      m_Extent: {x: 5.80000305, y: 2.5200007, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -3722,7 +3863,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 144
-    _typelessdata: ffff67c09999c9bf000000000000000000000000000080bfffe8e8ff0000000000000000010068409999c9bf000000000000000000000000000080bfffe8e8ff0000803f00000000010068409999c93f000000000000000000000000000080bfffe8e8ff0000803f0000803fffff67c09999c93f000000000000000000000000000080bfffe8e8ff000000000000803f
+    _typelessdata: 9f99b9c0b14721c0000000000000000000000000000080bfffe8e8ff0000000000000000a199b940b14721c0000000000000000000000000000080bfffe8e8ff0000803f00000000a199b940b1472140000000000000000000000000000080bfffe8e8ff0000803f0000803f9f99b9c0b1472140000000000000000000000000000080bfffe8e8ff000000000000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -3779,8 +3920,8 @@ Mesh:
       m_Data: 
       m_BitSize: 0
   m_LocalAABB:
-    m_Center: {x: 2.38418579e-07, y: 0, z: 0}
-    m_Extent: {x: 3.625, y: 1.57499993, z: 0}
+    m_Center: {x: 4.76837158e-07, y: 0, z: 0}
+    m_Extent: {x: 5.80000305, y: 2.5200007, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
 --- !u!1 &1518665579
@@ -4132,8 +4273,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 2.38418579e-07, y: 2.38418579e-07, z: 0}
-      m_Extent: {x: 3.625, y: 2.125, z: 0}
+      m_Center: {x: 4.76837158e-07, y: 3.57627869e-07, z: 0}
+      m_Extent: {x: 5.80000019, y: 3.4000001, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -4199,7 +4340,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 144
-    _typelessdata: ffff67c0ffff07c0000000000000000000000000000080bfa3a3a3ff000000000000000001006840ffff07c0000000000000000000000000000080bfa3a3a3ff0000803f000000000100684001000840000000000000000000000000000080bfa3a3a3ff0000803f0000803fffff67c001000840000000000000000000000000000080bfa3a3a3ff000000000000803f
+    _typelessdata: 9999b9c0989959c0000000000000000000000000000080bfa3a3a3ff00000000000000009b99b940989959c0000000000000000000000000000080bfa3a3a3ff0000803f000000009b99b9409b995940000000000000000000000000000080bfa3a3a3ff0000803f0000803f9999b9c09b995940000000000000000000000000000080bfa3a3a3ff000000000000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -4256,8 +4397,8 @@ Mesh:
       m_Data: 
       m_BitSize: 0
   m_LocalAABB:
-    m_Center: {x: 2.38418579e-07, y: 2.38418579e-07, z: 0}
-    m_Extent: {x: 3.625, y: 2.125, z: 0}
+    m_Center: {x: 4.76837158e-07, y: 3.57627869e-07, z: 0}
+    m_Extent: {x: 5.80000019, y: 3.4000001, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
 --- !u!1 &1654150990
@@ -4272,7 +4413,7 @@ GameObject:
   - 23: {fileID: 1654150993}
   - 33: {fileID: 1654150992}
   - 114: {fileID: 1654150995}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite_wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4286,7 +4427,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1654150990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.51667142, y: -.722225189, z: -1}
+  m_LocalPosition: {x: -2.11667156, y: -.622225285, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1004839050}
@@ -4335,7 +4476,7 @@ MonoBehaviour:
       m_rTexture: {fileID: 2800000, guid: a3637f124c01e40488d9758e3124b442, type: 3}
     atlas: {fileID: 0}
     sharedMaterial: {fileID: 0}
-    spriteScale: 5
+    spriteScale: 7
     renderMesh: 0
     usePhysicBuildSettings: 0
     pivotType: 5
@@ -4372,7 +4513,7 @@ MonoBehaviour:
     renderMeshMaterial: {fileID: 1617248496}
     generatedMaterial: {fileID: 1617248496}
     pivotCoords: {x: 7.5, y: 7.5}
-    scale: .049999997
+    scale: .0700000003
     colliderTriangleCount: 0
     meshCollidersRootGameObject: {fileID: 0}
     meshCollidersList: []
@@ -4714,6 +4855,18 @@ Mesh:
     m_Extent: {x: 3.19999981, y: .799999952, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
+--- !u!114 &1736561360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729f2c1e7207848aeb038a51ba97289c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_rOriginalOwner: {fileID: 1914878300}
 --- !u!114 &1736951333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4741,8 +4894,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 2.38418579e-07, y: 0, z: 0}
-      m_Extent: {x: 3.625, y: 1.57499993, z: 0}
+      m_Center: {x: 4.76837158e-07, y: 0, z: 0}
+      m_Extent: {x: 5.80000305, y: 2.5200007, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -4808,7 +4961,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 144
-    _typelessdata: ffff67c09999c9bf000000000000000000000000000080bfffe8e8ff0000000000000000010068409999c9bf000000000000000000000000000080bfffe8e8ff0000803f00000000010068409999c93f000000000000000000000000000080bfffe8e8ff0000803f0000803fffff67c09999c93f000000000000000000000000000080bfffe8e8ff000000000000803f
+    _typelessdata: 9f99b9c0b14721c0000000000000000000000000000080bfffe8e8ff0000000000000000a199b940b14721c0000000000000000000000000000080bfffe8e8ff0000803f00000000a199b940b1472140000000000000000000000000000080bfffe8e8ff0000803f0000803f9f99b9c0b1472140000000000000000000000000000080bfffe8e8ff000000000000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -4865,8 +5018,8 @@ Mesh:
       m_Data: 
       m_BitSize: 0
   m_LocalAABB:
-    m_Center: {x: 2.38418579e-07, y: 0, z: 0}
-    m_Extent: {x: 3.625, y: 1.57499993, z: 0}
+    m_Center: {x: 4.76837158e-07, y: 0, z: 0}
+    m_Extent: {x: 5.80000305, y: 2.5200007, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
 --- !u!21 &1823677339
@@ -4915,7 +5068,7 @@ Mesh:
     vertexCount: 4
     localAABB:
       m_Center: {x: 0, y: 1.1920929e-07, z: 0}
-      m_Extent: {x: 2.54999995, y: 1.125, z: 0}
+      m_Extent: {x: 3.5700016, y: 1.57500017, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -4981,7 +5134,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 144
-    _typelessdata: 333323c0ffff8fbf000000000000000000000000000080bfffffffff000000000000000033332340ffff8fbf000000000000000000000000000080bfffffffff0000803f00000000333323400100903f000000000000000000000000000080bfffffffff0000803f0000803f333323c00100903f000000000000000000000000000080bfffffffff000000000000803f
+    _typelessdata: e87a64c09a99c9bf000000000000000000000000000080bfffffffff0000000000000000e87a64409a99c9bf000000000000000000000000000080bfffffffff0000803f00000000e87a64409c99c93f000000000000000000000000000080bfffffffff0000803f0000803fe87a64c09c99c93f000000000000000000000000000080bfffffffff000000000000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -5039,7 +5192,7 @@ Mesh:
       m_BitSize: 0
   m_LocalAABB:
     m_Center: {x: 0, y: 1.1920929e-07, z: 0}
-    m_Extent: {x: 2.54999995, y: 1.125, z: 0}
+    m_Extent: {x: 3.5700016, y: 1.57500017, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
 --- !u!43 &1848552752
@@ -5057,8 +5210,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 0, y: 2.38418579e-07, z: 0}
-      m_Extent: {x: 8.02499962, y: 2.5, z: 0}
+      m_Center: {x: 0, y: 3.57627869e-07, z: 0}
+      m_Extent: {x: 12.8399992, y: 4, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -5124,7 +5277,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 144
-    _typelessdata: 666600c1ffff1fc0000000000000000000000000ffff7fbfaeaeaeff000000000000000066660041ffff1fc0000000000000000000000000ffff7fbfaeaeaeff0000803f000000006666004101002040000000000000000000000000ffff7fbfaeaeaeff0000803f0000803f666600c101002040000000000000000000000000ffff7fbfaeaeaeff000000000000803f
+    _typelessdata: a3704dc1ffff7fc0000000000000000000000000ffff7fbfaeaeaeff0000000000000000a3704d41ffff7fc0000000000000000000000000ffff7fbfaeaeaeff0000803f00000000a3704d4101008040000000000000000000000000ffff7fbfaeaeaeff0000803f0000803fa3704dc101008040000000000000000000000000ffff7fbfaeaeaeff000000000000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -5181,8 +5334,8 @@ Mesh:
       m_Data: 
       m_BitSize: 0
   m_LocalAABB:
-    m_Center: {x: 0, y: 2.38418579e-07, z: 0}
-    m_Extent: {x: 8.02499962, y: 2.5, z: 0}
+    m_Center: {x: 0, y: 3.57627869e-07, z: 0}
+    m_Extent: {x: 12.8399992, y: 4, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
 --- !u!1 &1859210194
@@ -5213,8 +5366,9 @@ Transform:
   m_Children:
   - {fileID: 1137558333}
   - {fileID: 1004839050}
+  - {fileID: 950246211}
   - {fileID: 946113314}
-  - {fileID: 76714239}
+  - {fileID: 88142039}
   m_Father: {fileID: 0}
 --- !u!114 &1859210196
 MonoBehaviour:
@@ -5260,8 +5414,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 2.38418579e-07, y: 2.38418579e-07, z: 0}
-      m_Extent: {x: 3.625, y: 2.125, z: 0}
+      m_Center: {x: 4.76837158e-07, y: 3.57627869e-07, z: 0}
+      m_Extent: {x: 5.80000019, y: 3.4000001, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -5327,7 +5481,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 144
-    _typelessdata: ffff67c0ffff07c0000000000000000000000000000080bfa3a3a3ff000000000000000001006840ffff07c0000000000000000000000000000080bfa3a3a3ff0000803f000000000100684001000840000000000000000000000000000080bfa3a3a3ff0000803f0000803fffff67c001000840000000000000000000000000000080bfa3a3a3ff000000000000803f
+    _typelessdata: 9999b9c0989959c0000000000000000000000000000080bfa3a3a3ff00000000000000009b99b940989959c0000000000000000000000000000080bfa3a3a3ff0000803f000000009b99b9409b995940000000000000000000000000000080bfa3a3a3ff0000803f0000803f9999b9c09b995940000000000000000000000000000080bfa3a3a3ff000000000000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -5384,8 +5538,8 @@ Mesh:
       m_Data: 
       m_BitSize: 0
   m_LocalAABB:
-    m_Center: {x: 2.38418579e-07, y: 2.38418579e-07, z: 0}
-    m_Extent: {x: 3.625, y: 2.125, z: 0}
+    m_Center: {x: 4.76837158e-07, y: 3.57627869e-07, z: 0}
+    m_Extent: {x: 5.80000019, y: 3.4000001, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
 --- !u!43 &1887794291
@@ -5403,8 +5557,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 0, y: 2.38418579e-07, z: 0}
-      m_Extent: {x: 8.02499962, y: 2.5, z: 0}
+      m_Center: {x: 0, y: 3.57627869e-07, z: 0}
+      m_Extent: {x: 12.8399992, y: 4, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -5470,7 +5624,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 144
-    _typelessdata: 666600c1ffff1fc0000000000000000000000000ffff7fbfaeaeaeff000000000000000066660041ffff1fc0000000000000000000000000ffff7fbfaeaeaeff0000803f000000006666004101002040000000000000000000000000ffff7fbfaeaeaeff0000803f0000803f666600c101002040000000000000000000000000ffff7fbfaeaeaeff000000000000803f
+    _typelessdata: a3704dc1ffff7fc0000000000000000000000000ffff7fbfaeaeaeff0000000000000000a3704d41ffff7fc0000000000000000000000000ffff7fbfaeaeaeff0000803f00000000a3704d4101008040000000000000000000000000ffff7fbfaeaeaeff0000803f0000803fa3704dc101008040000000000000000000000000ffff7fbfaeaeaeff000000000000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -5527,8 +5681,8 @@ Mesh:
       m_Data: 
       m_BitSize: 0
   m_LocalAABB:
-    m_Center: {x: 0, y: 2.38418579e-07, z: 0}
-    m_Extent: {x: 8.02499962, y: 2.5, z: 0}
+    m_Center: {x: 0, y: 3.57627869e-07, z: 0}
+    m_Extent: {x: 12.8399992, y: 4, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
 --- !u!21 &1900813456
@@ -5561,6 +5715,149 @@ Material:
         first:
           name: _TintColor
         second: {r: .5, g: .5, b: .5, a: .5}
+--- !u!43 &1901093680
+Mesh:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: mesh_Sprite_intro
+  serializedVersion: 8
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 6
+    topology: 0
+    firstVertex: 0
+    vertexCount: 4
+    localAABB:
+      m_Center: {x: 0, y: 1.24999952, z: 0}
+      m_Extent: {x: 1.24999952, y: 1.24999952, z: 0}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_MeshCompression: 0
+  m_StreamCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexBuffer: 010000000200020000000300
+  m_Skin: []
+  m_VertexData:
+    m_CurrentChannels: 15
+    m_VertexCount: 4
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 24
+      format: 2
+      dimension: 1
+    - stream: 0
+      offset: 28
+      format: 0
+      dimension: 2
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_Streams:
+    - channelMask: 15
+      offset: 0
+      stride: 36
+      dividerOp: 0
+      frequency: 0
+    - channelMask: 0
+      offset: 0
+      stride: 0
+      dividerOp: 0
+      frequency: 0
+    - channelMask: 0
+      offset: 0
+      stride: 0
+      dividerOp: 0
+      frequency: 0
+    - channelMask: 0
+      offset: 0
+      stride: 0
+      dividerOp: 0
+      frequency: 0
+    m_DataSize: 144
+    _typelessdata: fcff9fbffdffffb3000000000000000000000000000080bfffffffff0000000000000000fcff9f3ffdffffb3000000000000000000000000000080bfffffffff0000803f00000000fcff9f3ffcff1f40000000000000000000000000000080bfffffffff0000803f0000803ffcff9fbffcff1f40000000000000000000000000000080bfffffffff000000000000803f
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BindPoses:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Colors:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+  m_LocalAABB:
+    m_Center: {x: 0, y: 1.24999952, z: 0}
+    m_Extent: {x: 1.24999952, y: 1.24999952, z: 0}
+  m_MeshUsageFlags: 0
+  m_MeshOptimized: 0
 --- !u!1 &1906677861
 GameObject:
   m_ObjectHideFlags: 0
@@ -5587,7 +5884,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1906677861}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.01946449, y: 0, z: 0}
+  m_LocalPosition: {x: 40.9805336, y: 2.29997826, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1168258607}
@@ -5649,7 +5946,7 @@ MonoBehaviour:
       m_rTexture: {fileID: 2800000, guid: cc05ffb75c540bb4fb160bc0ea52a87b, type: 3}
     atlas: {fileID: 0}
     sharedMaterial: {fileID: 0}
-    spriteScale: 5
+    spriteScale: 8
     renderMesh: 0
     usePhysicBuildSettings: 0
     pivotType: 5
@@ -5686,7 +5983,7 @@ MonoBehaviour:
     renderMeshMaterial: {fileID: 849739886}
     generatedMaterial: {fileID: 849739886}
     pivotCoords: {x: 72.5, y: 42.5}
-    scale: .049999997
+    scale: .0799999982
     colliderTriangleCount: 0
     meshCollidersRootGameObject: {fileID: 0}
     meshCollidersList: []
@@ -5699,6 +5996,131 @@ MonoBehaviour:
     m_iStartClipIndex: 0
     playAutomatically: 1
   m_oDuplicataMarker: {fileID: 191981624}
+--- !u!1 &1914878296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1914878297}
+  - 114: {fileID: 1914878300}
+  - 23: {fileID: 1914878299}
+  - 33: {fileID: 1914878298}
+  m_Layer: 0
+  m_Name: Sprite_player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1914878297
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1914878296}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.24999988, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 88142039}
+--- !u!33 &1914878298
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1914878296}
+  m_Mesh: {fileID: 1901093680}
+--- !u!23 &1914878299
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1914878296}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 1004542426}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
+--- !u!114 &1914878300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1914878296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c37b90a280d84c3385415331aae24fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_rSpriteSettings:
+    textureContainer:
+      m_oTextureGUID: 0981d5332fe4029439ff01403aef8b95
+      m_rTexture: {fileID: 2800000, guid: 0981d5332fe4029439ff01403aef8b95, type: 3}
+    atlas: {fileID: 0}
+    sharedMaterial: {fileID: 0}
+    spriteScale: 5
+    renderMesh: 0
+    usePhysicBuildSettings: 0
+    pivotType: 8
+    pivotCustomCoords: {x: 0, y: 0}
+    vertexColor: {r: 1, g: 1, b: 1, a: 1}
+    physicsMode: 0
+    collisionType: 0
+    isKinematic: 0
+    alphaCutOff: .75
+    extrusionDepth: .5
+    polygonizationAccuracy: 5
+    polygonizeHoles: 0
+    renderMeshAlphaCutOff: .75
+    renderMeshPolygonizationAccuracy: 5
+    renderMeshPolygonizeHoles: 0
+    renderMeshGridHorizontalSubDivs: 5
+    renderMeshGridVerticalSubDivs: 5
+    skinQuality: 4
+    boneInfluenceFalloff: 4
+  m_rSpriteData:
+    spriteWidth: 50
+    spriteHeight: 50
+    renderMesh: {fileID: 1901093680}
+    renderMeshVertices:
+    - {x: 0, y: 0, z: 0}
+    - {x: .5, y: 0, z: 0}
+    - {x: .5, y: .5, z: 0}
+    - {x: 0, y: .5, z: 0}
+    renderMeshUVs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    - {x: 0, y: 1}
+    renderMeshMaterial: {fileID: 1004542426}
+    generatedMaterial: {fileID: 1004542426}
+    pivotCoords: {x: 25, y: 0}
+    scale: .049999997
+    colliderTriangleCount: 0
+    meshCollidersRootGameObject: {fileID: 0}
+    meshCollidersList: []
+    meshColliderComponentsList: []
+  isPhysicsDirty: 0
+  atlasGenerationID: 
+  m_oTextureImportGUID: cabb8071-83eb-4387-8952-a8ca228a5508
+  spriteAnimation:
+    m_rAnimationClips:
+    - {fileID: 11400000, guid: 33fb177f68a44cf4eaa9d2d18c51aedb, type: 2}
+    m_iStartClipIndex: 0
+    playAutomatically: 1
+  m_oDuplicataMarker: {fileID: 1736561360}
 --- !u!1 &1918399252
 GameObject:
   m_ObjectHideFlags: 0
@@ -5776,7 +6198,7 @@ MonoBehaviour:
       m_rTexture: {fileID: 2800000, guid: ea2b05288d93e574ea0e4dfbce7682bf, type: 3}
     atlas: {fileID: 0}
     sharedMaterial: {fileID: 0}
-    spriteScale: 5
+    spriteScale: 8
     renderMesh: 0
     usePhysicBuildSettings: 0
     pivotType: 5
@@ -5813,7 +6235,7 @@ MonoBehaviour:
     renderMeshMaterial: {fileID: 1698173798}
     generatedMaterial: {fileID: 1698173798}
     pivotCoords: {x: 160.5, y: 50}
-    scale: .049999997
+    scale: .0799999982
     colliderTriangleCount: 0
     meshCollidersRootGameObject: {fileID: 0}
     meshCollidersList: []
@@ -5833,7 +6255,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1918399252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.0499992, y: 0, z: 0}
+  m_LocalPosition: {x: 73.8299942, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 459535465}
@@ -5879,7 +6301,7 @@ GameObject:
   - 23: {fileID: 2009467070}
   - 33: {fileID: 2009467069}
   - 114: {fileID: 2009467068}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite_wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5893,7 +6315,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2009467066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.52387285, y: -.72222501, z: -1}
+  m_LocalPosition: {x: 2.12387276, y: -.622224808, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1004839050}
@@ -5955,7 +6377,7 @@ MonoBehaviour:
       m_rTexture: {fileID: 2800000, guid: a3637f124c01e40488d9758e3124b442, type: 3}
     atlas: {fileID: 0}
     sharedMaterial: {fileID: 0}
-    spriteScale: 5
+    spriteScale: 7
     renderMesh: 0
     usePhysicBuildSettings: 0
     pivotType: 5
@@ -5992,7 +6414,7 @@ MonoBehaviour:
     renderMeshMaterial: {fileID: 1900813456}
     generatedMaterial: {fileID: 1900813456}
     pivotCoords: {x: 7.5, y: 7.5}
-    scale: .049999997
+    scale: .0700000003
     colliderTriangleCount: 0
     meshCollidersRootGameObject: {fileID: 0}
     meshCollidersList: []
@@ -6055,7 +6477,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2057146264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.18053436, y: 0, z: 0}
+  m_LocalPosition: {x: 52.5805321, y: 2.29997826, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1168258607}
@@ -6117,7 +6539,7 @@ MonoBehaviour:
       m_rTexture: {fileID: 2800000, guid: cc05ffb75c540bb4fb160bc0ea52a87b, type: 3}
     atlas: {fileID: 0}
     sharedMaterial: {fileID: 0}
-    spriteScale: 5
+    spriteScale: 8
     renderMesh: 0
     usePhysicBuildSettings: 0
     pivotType: 5
@@ -6154,7 +6576,7 @@ MonoBehaviour:
     renderMeshMaterial: {fileID: 1940542193}
     generatedMaterial: {fileID: 1940542193}
     pivotCoords: {x: 72.5, y: 42.5}
-    scale: .049999997
+    scale: .0799999982
     colliderTriangleCount: 0
     meshCollidersRootGameObject: {fileID: 0}
     meshCollidersList: []
@@ -6233,7 +6655,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2095291502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 10}
+  m_LocalPosition: {x: -26.7169342, y: -1.04582584, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 454055526}
@@ -6296,7 +6718,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2106571850}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.21946526, y: 0, z: 0}
+  m_LocalPosition: {x: 29.3805351, y: 2.29997826, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1168258607}
@@ -6358,7 +6780,7 @@ MonoBehaviour:
       m_rTexture: {fileID: 2800000, guid: cc05ffb75c540bb4fb160bc0ea52a87b, type: 3}
     atlas: {fileID: 0}
     sharedMaterial: {fileID: 0}
-    spriteScale: 5
+    spriteScale: 8
     renderMesh: 0
     usePhysicBuildSettings: 0
     pivotType: 5
@@ -6395,7 +6817,7 @@ MonoBehaviour:
     renderMeshMaterial: {fileID: 786091819}
     generatedMaterial: {fileID: 786091819}
     pivotCoords: {x: 72.5, y: 42.5}
-    scale: .049999997
+    scale: .0799999982
     colliderTriangleCount: 0
     meshCollidersRootGameObject: {fileID: 0}
     meshCollidersList: []
@@ -6434,7 +6856,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2118592351}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.21946526, y: 0, z: 0}
+  m_LocalPosition: {x: 29.3805351, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2095291503}
@@ -6496,7 +6918,7 @@ MonoBehaviour:
       m_rTexture: {fileID: 2800000, guid: de5dd5e0c6c63ef478c5968e1d83cd47, type: 3}
     atlas: {fileID: 0}
     sharedMaterial: {fileID: 0}
-    spriteScale: 5
+    spriteScale: 8
     renderMesh: 0
     usePhysicBuildSettings: 0
     pivotType: 5
@@ -6533,7 +6955,7 @@ MonoBehaviour:
     renderMeshMaterial: {fileID: 477516991}
     generatedMaterial: {fileID: 477516991}
     pivotCoords: {x: 72.5, y: 31.5}
-    scale: .049999997
+    scale: .0799999982
     colliderTriangleCount: 0
     meshCollidersRootGameObject: {fileID: 0}
     meshCollidersList: []
