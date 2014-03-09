@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
         CurrentGameState = GameState.Start;
-        //player         = GameObject.FindGameObjectWithTag("Player");
+        player           = GameObject.FindGameObjectWithTag("Player");
         bus              = GameObject.FindGameObjectWithTag("Bus");
         cameraPivot      = new CameraPivot();
     }
@@ -59,8 +59,13 @@ public class GameManager : MonoBehaviour {
     }
 
     private void IntroState() {
-        if (Distance.DistanceAbs(bus.transform.position.x, cameraPivot._right.x) > .1f) bus.transform.position += Vector3.right * (Time.smoothDeltaTime * 2);
-        //Debug.Log(Distance.DistanceAbs(bus.transform.position.x, cameraPivot._right.x).ToString());
+        var p = Math.GetValueByPercentage(cameraPivot._left.x, -50, Math.MathStatements.Round);
+        if (Math.Distance(bus.transform.position.x, cameraPivot._right.x, true) > .1f) bus.transform.position += Vector3.right * (Time.smoothDeltaTime * 2);
+        if (Math.Distance(player.transform.position.x, cameraPivot._left.x + p, true) > .1f) player.transform.position += Vector3.right * (Time.smoothDeltaTime * 2);
+        //Debug.Log(Math.Distance(player.transform.position.x, cameraPivot._left.x + Math.GetValueByPercentage(cameraPivot._left.x, 25)).ToString());
+        //Debug.Log((cameraPivot._left.x + Math.GetValueByPercentage(cameraPivot._left.x, 25)).ToString());
+        //Debug.Log(cameraPivot._left.x.ToString());
+        //Debug.Log(Math.Distance(player.transform.position.x, cameraPivot._left.x + p).ToString());
     }
 
     private void StartState() {
