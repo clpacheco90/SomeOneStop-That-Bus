@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public static class CharacterMovement{	
+public static class CharacterMovement{
+    //-----------------------------------------------------------------------------------------------------------------------------//			
+    private static bool jumping;
     //-----------------------------------------------------------------------------------------------------------------------------//			
 	private static bool IsTouchingCeiling (ControllerMovement movement) {
 		return (movement.collisionFlags & CollisionFlags.CollidedAbove) != 0;
@@ -25,11 +27,10 @@ public static class CharacterMovement{
         return (abs) ? (Mathf.Abs(v) > 0.1f) : v != 0f;
     }
     //-----------------------------------------------------------------------------------------------------------------------------//	
-    public static float Distance(float a, float b, bool abs = false) {
-        var d = a - b;
-        return (abs) ? (Mathf.Abs(d)) : d;
+    public static bool IsJumpping() {
+        return jumping;
     }
-    //-----------------------------------------------------------------------------------------------------------------------------//		
+    //-----------------------------------------------------------------------------------------------------------------------------//	
 	private static bool JustBecameUngrounded(ControllerJumping jump) {
 		return (Time.time < (jump.lastGroundedTime + jump.groundingTimeout) && jump.lastGroundedTime > jump.lastTime);
 	}
@@ -41,13 +42,14 @@ public static class CharacterMovement{
 	}
     //-----------------------------------------------------------------------------------------------------------------------------//		
 	private static void DidJump (ControllerMovement movement, ControllerJumping jump) {
-		jump.jumping 			= true;
+        jumping                 = jump.jumping = true;
 		jump.reachedApex 		= false;
 		jump.lastTime 			= Time.time;
 		jump.lastStartHeight 	= movement.transform.position.y;
 		jump.lastButtonTime 	= -10;
 		jump.touchedCeiling 	= false;
 		jump.buttonReleased 	= false;
+        
 	}
     //-----------------------------------------------------------------------------------------------------------------------------//	
 	public static void UpdateSmoothedMovementDirection (ref ControllerMovement movement, ControllerJumping jump, CharacterController controller, bool canControl = false) {
@@ -67,6 +69,7 @@ public static class CharacterMovement{
 			curSmooth 			 = movement.speedSmoothing * Time.smoothDeltaTime;
 			targetSpeed 		*= movement.runSpeed;
 			movement.hangTime 	 = 0.0f;
+            jumping              = false;
 		}else{
 			curSmooth 			 = jump.speedSmoothing * Time.smoothDeltaTime;
 			targetSpeed 		*= jump.jumpSpeed;

@@ -17,6 +17,17 @@ public class PlayerGameState : MonoBehaviour {
             _idx = 1;
             _sprite.spriteAnimation.Play(_idx);
         }
+
+        if (CharacterMovement.IsJumpping()) {
+            _sprite.spriteAnimation.Play(_sprite.spriteAnimation.GetClipIndexByName("player_jumping"));
+            _startAnimation = true;
+        } else {
+            if (_startAnimation) {
+                _sprite.spriteAnimation.Play(_sprite.spriteAnimation.GetClipIndexByName("player_running"));
+                _startAnimation = false;
+            }            
+            //_sprite.spriteAnimation.Play();
+        } //if
         //}
     }
 }
