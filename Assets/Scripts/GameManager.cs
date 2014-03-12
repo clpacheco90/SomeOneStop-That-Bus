@@ -2,44 +2,42 @@
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-
+    //-----------------------------------------------------------------------------------------------------------------------------//
     public enum GameState {
         Start,
         Intro,
         OnGame,
         Lose
     }
-
-    public GameObject player;
-    public GameObject bus;
+    //-----------------------------------------------------------------------------------------------------------------------------//
     public float environmentAceleration;
     public float environmentSpeedSmoothing;
     public bool enablePlayerJump;
     public int forwardWay = -1;
 
     public static float EnvironmentAceleration;
-    [SerializeField]public static float EnvironmentSpeedSmoothing;
+    public static float EnvironmentSpeedSmoothing;
     public static float CameraHorizontalExtent;
     public static int ForwardWay;
 
     public static GameState CurrentGameState;
-
-    private bool col;
-
-
     private CameraPivot cameraPivot;
-
+    private GameObject player;
+    private GameObject bus;
+    private float orthographicSize;
+    private bool col;
+    //-----------------------------------------------------------------------------------------------------------------------------//		
     void Start() {
         CurrentGameState = GameState.Start;
+        //CurrentGameState = GameState.OnGame;
         player           = GameObject.FindGameObjectWithTag("Player");
         bus              = GameObject.FindGameObjectWithTag("Bus");
         cameraPivot      = new CameraPivot();
+        orthographicSize = Camera.main.camera.orthographicSize;
+        player.GetComponent<PlayerController>()._canControl = false;
     }
-	
-    // Update is called once per frame
+    //-----------------------------------------------------------------------------------------------------------------------------//		
     void Update() { 
-        //if(Application.loadedLevelName.Equals("StartGame")) goto MoveObjects;
-
         //MoveObjects:
         switch (CurrentGameState) {
             case GameState.Start:
@@ -57,20 +55,26 @@ public class GameManager : MonoBehaviour {
         EnvironmentAceleration    = environmentAceleration;
         EnvironmentSpeedSmoothing = environmentSpeedSmoothing * ForwardWay;
     }
-
+    //-----------------------------------------------------------------------------------------------------------------------------//		
     private void IntroState() {
-        var p = Math.GetValueByPercentage(cameraPivot._left.x, -50, Math.MathStatements.Round);
-        if (Math.Distance(bus.transform.position.x, cameraPivot._right.x, true) > .1f) bus.transform.position += Vector3.right * (Time.smoothDeltaTime * 2);
-        if (Math.Distance(player.transform.position.x, cameraPivot._left.x + p, true) > .1f) player.transform.position += Vector3.right * (Time.smoothDeltaTime * 2);
-        //Debug.Log(Math.Distance(player.transform.position.x, cameraPivot._left.x + Math.GetValueByPercentage(cameraPivot._left.x, 25)).ToString());
-        //Debug.Log((cameraPivot._left.x + Math.GetValueByPercentage(cameraPivot._left.x, 25)).ToString());
-        //Debug.Log(cameraPivot._left.x.ToString());
-        //Debug.Log(Math.Distance(player.transform.position.x, cameraPivot._left.x + p).ToString());
-    }
+        var p               = Math.GetValueByPercentage(cameraPivot._left.x, -50, Math.MathStatements.Round);
+        var busAnimation    = (Math.Distance(bus.transform.position.x, cameraPivot._right.x, true) > .1f);
+        var playerAnimation = (Math.Distance(player.transform.position.x, cameraPivot._left.x + p, true) > .1f);
 
+        if (busAnimation) bus.transform.position += Vector3.right * (Time.smoothDeltaTime * 2);
+        if (playerAnimation) player.transform.position += Vector3.right * (Time.smoothDeltaTime * 2);
+
+        if (!busAnimation && !playerAnimation) {
+            CurrentGameState = GameState.OnGame;
+            player.GetComponent<PlayerController>()._canControl = true;
+        }
+    }
+    //-----------------------------------------------------------------------------------------------------------------------------//		
     private void StartState() {
         //throw new System.NotImplementedException();
     }
+    //-----------------------------------------------------------------------------------------------------------------------------//		
+
     //void Update() {
     //    switch (CurrentGameState) {
     //        case GameState.Start:
@@ -107,10 +111,13 @@ public class GameManager : MonoBehaviour {
     //    EnvironmentSpeedSmoothing = _environmentSpeedSmoothing * ForwardWay;
     //}
 
+    //-----------------------------------------------------------------------------------------------------------------------------//		
     void LateUpdate() {
-        CameraHorizontalExtent = Camera.main.camera.orthographicSize * Screen.width / Screen.height;
+        if (orthographicSize == Camera.main.camera.orthographicSize) return;
+        orthographicSize       = Camera.main.camera.orthographicSize;
+        CameraHorizontalExtent = orthographicSize * Screen.width / Screen.height;        
     }
-
+    //-----------------------------------------------------------------------------------------------------------------------------//		
     void AddingMoreSpeed() {
         if (environmentSpeedSmoothing >= 25) return;
         environmentSpeedSmoothing += environmentSpeedSmoothing * 0.001f;
@@ -122,4 +129,5 @@ public class GameManager : MonoBehaviour {
             }
         }
     }
+    //-----------------------------------------------------------------------------------------------------------------------------//		
 }

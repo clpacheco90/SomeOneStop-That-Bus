@@ -38,6 +38,8 @@ public class PlayerController : Character  {
         if (!_controller.isGrounded) return;
         _jump.extraHeight = _extraHeightAux;
         _movement.gravity = _gravityAux;
+        _movement.direction = Vector3.zero;
+
     }
 //-----------------------------------------------------------------------------------------------------------------------------//		
 }
