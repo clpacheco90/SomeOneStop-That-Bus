@@ -13,21 +13,37 @@ public class PlayerGameState : MonoBehaviour {
     //-----------------------------------------------------------------------------------------------------------------------------//			    
     void Update() {
         //_sprite.VertexColor = new Color32(_sprite.VertexColor.r, _sprite.VertexColor.g, _sprite.VertexColor.b, 50);
+        switch (GameManager.CurrentGameState) {
+            case GameManager.GameState.Start:
+                break;
+            case GameManager.GameState.Intro:
+                break;
+            case GameManager.GameState.OnGame:
+                if (CharacterMovement.IsJumpping()) {
+                    _sprite.spriteAnimation.Play(_sprite.spriteAnimation.GetClipIndexByName("player_jumping"));
+                    _startAnimation = true;
+                } else {
+                    if (_startAnimation) {
+                        _sprite.spriteAnimation.Play(_sprite.spriteAnimation.GetClipIndexByName("player_running"));
+                        _startAnimation = false;
+                    }            
+                } //if
+                break;
+            case GameManager.GameState.Lose:
+                if (!_startAnimation) {
+                    _idx = 4;
+                    _sprite.spriteAnimation.Play(_idx);
+                    _startAnimation = !_startAnimation;
+                }
+                break;
+            default:
+                break;
+        }
         if (GameManager.CurrentGameState == GameManager.GameState.Lose) {
-            _idx = 1;
-            _sprite.spriteAnimation.Play(_idx);
+            
         }
 
-        if (CharacterMovement.IsJumpping()) {
-            _sprite.spriteAnimation.Play(_sprite.spriteAnimation.GetClipIndexByName("player_jumping"));
-            _startAnimation = true;
-        } else {
-            if (_startAnimation) {
-                _sprite.spriteAnimation.Play(_sprite.spriteAnimation.GetClipIndexByName("player_running"));
-                _startAnimation = false;
-            }            
-            //_sprite.spriteAnimation.Play();
-        } //if
+        
         //}
     }
 }

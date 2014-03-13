@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour {
     private GameObject bus;
     private float orthographicSize;
     private bool col;
+
+    private bool loseTest;
     //-----------------------------------------------------------------------------------------------------------------------------//		
     void Start() {
         CurrentGameState = GameState.Start;
@@ -49,11 +51,20 @@ public class GameManager : MonoBehaviour {
             case GameState.OnGame:
                 break;
             case GameState.Lose:
+                LoseState();
                 break;         
         }
         ForwardWay                = forwardWay;
         EnvironmentAceleration    = environmentAceleration;
         EnvironmentSpeedSmoothing = environmentSpeedSmoothing * ForwardWay;
+    }
+    //-----------------------------------------------------------------------------------------------------------------------------//		
+    private void LoseState() {
+        if (!loseTest) {
+            player.GetComponent<PlayerController>()._canControl = false;            
+            environmentAceleration      = 0;
+            environmentSpeedSmoothing   = 0;
+        }
     }
     //-----------------------------------------------------------------------------------------------------------------------------//		
     private void IntroState() {
