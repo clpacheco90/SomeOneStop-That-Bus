@@ -15,20 +15,20 @@ public class PlayerCollision : MonoBehaviour {
         GameManager.CurrentGameState = GameManager.GameState.Lose;
 	}
 
-    void OnCollisionEnter(Collision collision) {
-        if (!collision.gameObject.CompareTag("Block")) return;
-        numberOfHits--;
-    }
-
-    //void OnTriggerEnter(Collider other) {
-    //    if (!other.CompareTag("Block")) return;
+    //void OnCollisionEnter(Collision collision) {
+    //    if (!collision.gameObject.CompareTag("Block")) return;
     //    numberOfHits--;
     //}
 
-    void OnControllerColliderHit(ControllerColliderHit hit) {
-        if (!hit.gameObject.CompareTag("Block")) return;
-        //this.gameObject.transform.position += new Vector3(this.gameObject.transform.position.x + 3, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+    void OnTriggerEnter(Collider other) {
+        if (!other.CompareTag("Block")) return;
         numberOfHits--;
     }
+
+    //void OnControllerColliderHit(ControllerColliderHit hit) {
+    //    if (!hit.gameObject.CompareTag("Block")) return;
+    //    //this.gameObject.transform.position += new Vector3(this.gameObject.transform.position.x + 3, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+    //    numberOfHits--;
+    //}
 
 }
