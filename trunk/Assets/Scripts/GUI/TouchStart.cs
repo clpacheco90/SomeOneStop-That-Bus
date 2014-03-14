@@ -12,6 +12,7 @@ public class TouchStart : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (GameManager.CurrentGameState != GameManager.GameState.Start) return;
         seconds += Time.deltaTime;
         if (seconds >= blinkSeconds) {
             this.guiText.enabled = !this.guiText.enabled;

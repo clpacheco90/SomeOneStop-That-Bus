@@ -30,13 +30,15 @@ public class GameManager : MonoBehaviour {
     private bool loseTest;
     //-----------------------------------------------------------------------------------------------------------------------------//		
     void Start() {
-        CurrentGameState = GameState.Start;
-        //CurrentGameState = GameState.OnGame;
+        CurrentGameState = GameState.Start;        
         player           = GameObject.FindGameObjectWithTag("Player");
         bus              = GameObject.FindGameObjectWithTag("Bus");
         cameraPivot      = new CameraPivot();
         orthographicSize = Camera.main.camera.orthographicSize;
         player.GetComponent<PlayerController>()._canControl = false;
+        {
+            //CurrentGameState = GameState.OnGame;
+        }
     }
     //-----------------------------------------------------------------------------------------------------------------------------//		
     void Update() { 
