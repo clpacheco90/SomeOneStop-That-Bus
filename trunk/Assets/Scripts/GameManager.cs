@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
         }
     }
     //-----------------------------------------------------------------------------------------------------------------------------//		
-    void Update() { 
+    void Update() {
         //MoveObjects:
         switch (CurrentGameState) {
             case GameState.Start:
