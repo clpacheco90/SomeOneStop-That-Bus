@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BarrierMovement : MonoBehaviour {
+public class ObjectMovement : MonoBehaviour {
     public float _speedSmooting = 1;
 	// Update is called once per frame
 	public void FixedUpdate () {   
