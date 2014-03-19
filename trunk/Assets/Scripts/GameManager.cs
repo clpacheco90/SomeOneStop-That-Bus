@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour {
     private GameObject bus;
     private float orthographicSize;
     private bool col;
-
-    private bool loseTest;
+    private float seconds;
+    private bool waitFewSecs;
     //-----------------------------------------------------------------------------------------------------------------------------//		
     void Start() {
         CurrentGameState = GameState.Start;        
@@ -62,11 +62,15 @@ public class GameManager : MonoBehaviour {
     }
     //-----------------------------------------------------------------------------------------------------------------------------//		
     private void LoseState() {
-        if (!loseTest) {
-            player.GetComponent<PlayerController>()._canControl = false;            
-            environmentAceleration      = 0;
-            environmentSpeedSmoothing   = 0;
-        }
+        if (!waitFewSecs) seconds += Time.deltaTime;
+        player.GetComponent<PlayerController>()._canControl = false;            
+        environmentAceleration      = 0;
+        environmentSpeedSmoothing   = 0;
+        if ((seconds >= 1) && (Input.anyKey)) {
+            waitFewSecs = true;
+            var lvlName = Application.loadedLevelName;
+            Application.LoadLevel(lvlName);
+        }        
     }
     //-----------------------------------------------------------------------------------------------------------------------------//		
     private void IntroState() {

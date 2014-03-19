@@ -5,14 +5,14 @@ public class PlayerGameState : MonoBehaviour {
     
     private Uni2DSprite _sprite;
     private int _idx;
-    private bool _startAnimation;
+    private bool _startAnimationOnGame;
+    private bool _startAnimationLose;
     //-----------------------------------------------------------------------------------------------------------------------------//			
     void Start() {
         _sprite = this.gameObject.GetComponent<Uni2DSprite>();
     }
     //-----------------------------------------------------------------------------------------------------------------------------//			    
-    void Update() {
-        //_sprite.VertexColor = new Color32(_sprite.VertexColor.r, _sprite.VertexColor.g, _sprite.VertexColor.b, 50);
+    void Update() {        
         switch (GameManager.CurrentGameState) {
             case GameManager.GameState.Start:
                 break;
@@ -21,29 +21,21 @@ public class PlayerGameState : MonoBehaviour {
             case GameManager.GameState.OnGame:
                 if (CharacterMovement.IsJumpping()) {
                     _sprite.spriteAnimation.Play(_sprite.spriteAnimation.GetClipIndexByName("player_jumping"));
-                    _startAnimation = true;
+                    _startAnimationOnGame = true;
                 } else {
-                    if (_startAnimation) {
+                    if (_startAnimationOnGame) {
                         _sprite.spriteAnimation.Play(_sprite.spriteAnimation.GetClipIndexByName("player_running"));
-                        _startAnimation = false;
+                        _startAnimationOnGame = false;
                     }            
                 } //if
                 break;
             case GameManager.GameState.Lose:
-                if (!_startAnimation) {
+                if (!_startAnimationLose) {
                     _idx = 4;
                     _sprite.spriteAnimation.Play(_idx);
-                    _startAnimation = !_startAnimation;
+                    _startAnimationLose = !_startAnimationLose;
                 }
                 break;
-            default:
-                break;
         }
-        if (GameManager.CurrentGameState == GameManager.GameState.Lose) {
-            
-        }
-
-        
-        //}
     }
 }

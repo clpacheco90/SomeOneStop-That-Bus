@@ -4891,17 +4891,17 @@ GUIText:
   serializedVersion: 3
   m_Text: PRESS START
   m_Anchor: 4
-  m_Alignment: 0
+  m_Alignment: 1
   m_PixelOffset: {x: 0, y: 0}
   m_LineSpacing: 1
   m_TabSize: 4
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: e3defb6ca0811804aacd9afc290000d9, type: 3}
   m_Material: {fileID: 0}
-  m_FontSize: 30
+  m_FontSize: 90
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4293980400
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!114 &946113316
@@ -4917,6 +4917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blinkSeconds: .200000003
   seconds: 0
+  guitextRetry: {fileID: 0}
 --- !u!1 &950246210
 GameObject:
   m_ObjectHideFlags: 0
@@ -5118,6 +5119,56 @@ Mesh:
     m_Extent: {x: .479999989, y: .479999989, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
+--- !u!1 &973470640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 973470641}
+  - 132: {fileID: 973470643}
+  m_Layer: 0
+  m_Name: GUI Text Retry
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &973470641
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 973470640}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .5, y: .330000013, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1988995750}
+--- !u!132 &973470643
+GUIText:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 973470640}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: TOUCH TO RETRY
+  m_Anchor: 4
+  m_Alignment: 1
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: e3defb6ca0811804aacd9afc290000d9, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 63
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_PixelCorrect: 1
+  m_RichText: 1
 --- !u!21 &975669594
 Material:
   serializedVersion: 3
@@ -6202,9 +6253,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 1109169906}
   - 132: {fileID: 1109169907}
+  - 114: {fileID: 1109169908}
   m_Layer: 0
-  m_Name: Score
-  m_TagString: HUD
+  m_Name: GUI Text - Score
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6234,15 +6286,27 @@ GUIText:
   m_PixelOffset: {x: 0, y: 0}
   m_LineSpacing: 1
   m_TabSize: 4
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 4c31874bb2d8c7d48a083ad320120288, type: 3}
   m_Material: {fileID: 0}
-  m_FontSize: 15
+  m_FontSize: 12
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
   m_PixelCorrect: 1
   m_RichText: 1
+--- !u!114 &1109169908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1109169905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3dcf46e75e952545811d3854a5c56e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentScore: 0
 --- !u!114 &1109248998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7310,9 +7374,9 @@ GUIText:
   m_PixelOffset: {x: 0, y: 0}
   m_LineSpacing: 1
   m_TabSize: 4
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 4c31874bb2d8c7d48a083ad320120288, type: 3}
   m_Material: {fileID: 0}
-  m_FontSize: 15
+  m_FontSize: 12
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -9524,7 +9588,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1859210195}
   - 114: {fileID: 1859210196}
-  - 114: {fileID: 1859210197}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Manager
@@ -9565,77 +9628,6 @@ MonoBehaviour:
   environmentSpeedSmoothing: 6
   enablePlayerJump: 0
   forwardWay: -1
---- !u!114 &1859210197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1859210194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3dcf46e75e952545811d3854a5c56e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentScore: 0
-  _gui:
-    m_Name: 
-    m_Normal:
-      m_Background: {fileID: 0}
-      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
-    m_Hover:
-      m_Background: {fileID: 0}
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_Active:
-      m_Background: {fileID: 0}
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_Focused:
-      m_Background: {fileID: 0}
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_OnNormal:
-      m_Background: {fileID: 0}
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_OnHover:
-      m_Background: {fileID: 0}
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_OnActive:
-      m_Background: {fileID: 0}
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_OnFocused:
-      m_Background: {fileID: 0}
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_Border:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Margin:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Padding:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Overflow:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Font: {fileID: 0}
-    m_FontSize: 0
-    m_FontStyle: 0
-    m_Alignment: 0
-    m_WordWrap: 0
-    m_RichText: 1
-    m_TextClipping: 0
-    m_ImagePosition: 0
-    m_ContentOffset: {x: 0, y: 0}
-    m_FixedWidth: 0
-    m_FixedHeight: 0
-    m_StretchWidth: 1
-    m_StretchHeight: 0
 --- !u!114 &1865319113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10692,6 +10684,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 946113314}
+  - {fileID: 973470641}
   - {fileID: 1213466604}
   - {fileID: 1109169906}
   m_Father: {fileID: 1859210195}
