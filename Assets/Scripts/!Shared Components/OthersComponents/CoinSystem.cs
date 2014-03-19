@@ -5,7 +5,6 @@ public class CoinSystem : MonoBehaviour {
 
     public int _currentScore;
     //public int _maxScore = 50; // The maximum score that the player will get
-	public GUIStyle _gui;
     private bool _achievement;
 //-----------------------------------------------------------------------------------------------------------------------------//			
 	void Start () {
@@ -17,6 +16,7 @@ public class CoinSystem : MonoBehaviour {
         //    //Debug.Log("You Collected all Buzios");
         //    _achievement = true; // Unlock the archiviment
         //}
+        this.gameObject.guiText.text = "score:" + _currentScore.ToString();
 	}
 //-----------------------------------------------------------------------------------------------------------------------------//		
     private void CheckAllTheCoinsInTheScene() {
@@ -25,8 +25,6 @@ public class CoinSystem : MonoBehaviour {
     }
 //-----------------------------------------------------------------------------------------------------------------------------//		
     void OnGUI() {
-        //GUI.color = Color.blue;
-        GUILayout.Label("Búzios " + _currentScore,_gui);
         if (!_achievement) return;
         //GUILayout.Label("Você desbloqueou um extra",_gui);
     }

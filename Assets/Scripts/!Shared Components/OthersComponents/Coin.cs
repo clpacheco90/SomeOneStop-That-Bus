@@ -6,7 +6,7 @@ public class Coin : MonoBehaviour {
 //-----------------------------------------------------------------------------------------------------------------------------//			
     void OnTriggerEnter(Collider other) {
         if (!other.transform.tag.Equals("Player")) return;
-        var scriptCoinSystem = GameObject.FindGameObjectWithTag("Manager").GetComponent<CoinSystem>();
+        var scriptCoinSystem = GameObject.Find("GUI Text - Score").GetComponent<CoinSystem>();
         scriptCoinSystem._currentScore++;
         Destroy(gameObject);
     }
