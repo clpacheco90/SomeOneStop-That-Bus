@@ -15,7 +15,7 @@ public class RespawnCollider : MonoBehaviour {
 	}
 
     void OnTriggerEnter(Collider other) {
-        if (!other.CompareTag("Block")) return;
+        if (!other.CompareTag("EndZone")) return;
         Destroy(other.gameObject.transform.parent.gameObject);
         this.gameObject.transform.parent.gameObject.GetComponent<ResspawnManager>().initializePrefab = true;
         //GetComponent<ResspawnManager>().initializePrefab = true;
